@@ -42,7 +42,7 @@ Note that:
 
 # Customizing link_to_add_nested
 #### Link text
-The default value is "Add <name of the associated model>", but it can be changed using the parameter `link_text`:
+The default value is `Add <name of the associated model>`, but it can be changed using the parameter `link_text`:
 
 ``` Ruby
 link_to_add_nested(form, :order_items, '#order-items', link_text: I18n.t(:some_key))
@@ -63,9 +63,9 @@ link_to_add_nested(form, :order_items, '#order-items', insert_method: :prepend)
 ```
 
 #### Partial name
-The default partial's name is infered using the association's class name. If your Order has_many :order_items and the class of those items is OrderItem, then the infered name is `_order_item_fields`. You can use any partial name you like, though:
+The default partial's name is infered using the association's class name. If your Order has_many :order_items and the class of those items is OrderItem, then the infered name is `order_item_fields`. You can use any partial name you like, though:
 ``` Ruby
-link_to_add_nested(form, :order_items, '#order-items', partial: '_my_partial')
+link_to_add_nested(form, :order_items, '#order-items', partial: 'my_partial')
 ```
 
 #### Form variable used in the partial
