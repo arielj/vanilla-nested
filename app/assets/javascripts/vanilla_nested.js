@@ -17,7 +17,7 @@ addVanillaNestedFields = function(btn) {
   let toInsert = auxDiv.children[0];
   const container = document.querySelector(btn.dataset.containerSelector);
   if (btn.dataset.methodForInsert == 'append') container.appendChild(toInsert);
-  else if (btn.dataset.methodForInsert == 'prepend') container.insertBefore(toInsert, container.children(0));
+  else if (btn.dataset.methodForInsert == 'prepend') container.insertBefore(toInsert, container.children[0]);
 }
 
 removeVanillaNestedFields = function(btn) {

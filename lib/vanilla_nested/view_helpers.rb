@@ -1,6 +1,6 @@
 module VanillaNested
   module ViewHelpers
-    def link_to_add_nested(form, association, container_selector, link_text: nil, link_classes: '', insertAt: :append, partial: nil, partial_form_variable: :form)
+    def link_to_add_nested(form, association, container_selector, link_text: nil, link_classes: '', insert_method: :append, partial: nil, partial_form_variable: :form)
       association_class = form.object.class.reflections[association.to_s].klass
       object = association_class.new
 
@@ -12,7 +12,7 @@ module VanillaNested
         end
       end
 
-      methodForInsert = [:append, :prepend].include?(insertAt.to_sym) ? insertAt : :append
+      methodForInsert = [:append, :prepend].include?(insert_method.to_sym) ? insert_method : :append
 
       classes = "vanilla-nested-add #{link_classes}"
       content_tag 'a', class: classes, data: {'container-selector': container_selector, html: html, 'method-for-insert': methodForInsert} do
