@@ -3,6 +3,13 @@ Rails dynamic nested forms using vanilla JS
 
 Similar to cocoon, but with no jquery dependency!
 
+# Installation
+For now, it can only be used from github
+
+```gem 'vanilla_nested', git: 'https://github.com/arielj/vanilla-nested', branch: 'master'```
+
+If you already have it installed and need to update it, run `bundle update --source vanilla_nested`.
+
 # Usage
 
 ``` HTML+ERB
