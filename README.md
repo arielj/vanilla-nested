@@ -42,7 +42,7 @@ Note that:
 
 # Customizing link_to_add_nested
 #### Link text
-The default value is "Add <name of the model associated", but it can be changed using the parameter `link_text`:
+The default value is "Add <name of the associated model>", but it can be changed using the parameter `link_text`:
 
 ``` Ruby
 link_to_add_nested(form, :order_items, '#order-items', link_text: I18n.t(:some_key))
@@ -69,7 +69,7 @@ link_to_add_nested(form, :order_items, '#order-items', partial: '_my_partial')
 ```
 
 #### Form variable used in the partial
-`link_to_add_nested` needs to render an empty template in order to later append/prepend it. To do that, it need to render the partial and pass the form as a local variable. If your partial uses `form`, you don't have to do anything, but if you using another variable name, just customize it here.
+`link_to_add_nested` needs to render an empty template in order to later append/prepend it. To do that, it passes the form as a local variable. If your partial uses `form`, you don't have to do anything, but if you using another variable name, just customize it here.
 
 ``` HTML+ERB
 # orders/_order_item_fields.html.erb
