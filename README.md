@@ -37,7 +37,6 @@ If you already have it installed and need to update it, run `bundle update --sou
 
 Note that:
 - `link_to_remove_nested` receives the nested form as a parameter, it adds a hidden `[_destroy]` field
-- Nested fields have to be grouped with a container div element and `link_to_remove_nested` must be a direct children! TODO: make it customizable
 - `link_to_add_nested` expects the form builder, the name of the association and the selector of the container where the gem will insert the new fields
 
 # Customizing link_to_add_nested
@@ -91,3 +90,20 @@ The default value is "X", but it can be changed using the parameter `link_text`:
 ``` Ruby
 link_to_remove_nested(form, link_text: "remove")
 ```
+
+#### Fields wrapper
+By default, the link to remove the fields assumes it's a direct child of the wrapper of the fields. You can customize this if you can't make it a direct child.
+
+``` HTML+ERB
+# orders/_order_item_fields.html.erb
+<div class="wrapper-div">
+  <fieldset>
+    <%= ff.text_field :attr1 %>
+    <%= ff.select :attr2 ..... %>
+  </fieldset>
+  <span><%= link_to_remove_nested(ff, fields_wrapper_selector: 'wrapper-div') # if we don't set this, it will only hide the span %></span>
+</div>
+```
+Note that:
+* The link MUST be a descendant of the fields wrapper, it may not be a direct child, but the look up of the wrapper uses javascript's `closest()` method, so it looks on the ancestors.
+* Since this uses javascript's `closest()`, there is no IE supported (https://caniuse.com/#search=closest). You may want to add a polyfill or define the method manually if you need to support it.
