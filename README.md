@@ -111,7 +111,9 @@ Note that:
 #### Undoing
 You can tell the plugin to add an "undo" link right after removing the fields (as a direct child of the fields wrapper! this is not customizable!).
 
-```link_to_remove_nested(ff, undo_link_timeout: 2000, undo_link_text: I18n.t('undo_remove_fields'), undo_link_classes: 'btn btn-secondary')```
+``` Ruby
+link_to_remove_nested(ff, undo_link_timeout: 2000, undo_link_text: I18n.t('undo_remove_fields'), undo_link_classes: 'btn btn-secondary')
+```
 
 Options are:
 * undo_link_timeout: miliseconds, greater than 0 to turn the feature on, default: `nil`
@@ -124,7 +126,7 @@ There are some events that you can listen to add custom callbacks on different m
 #### 'vanilla-nested:fields-added'
 Triggered right after the fields wrapper was inserted on the container.
 
-```
+``` Javascript
   document.addEventListener('vanilla-nested:fields-added', function(e){
     // e.type == 'vanilla-nested:fields-added'
     // e.target == container div of the fields
@@ -136,7 +138,7 @@ Triggered right after the fields wrapper was inserted on the container.
 #### 'vanilla-nested:fields-removed'
 Triggered when the fields wrapper if fully hidden (aka ""removed""), that is: after clicking the "remove" link with no timeout OR after the timeout finished.
 
-```
+``` Javascript
   document.addEventListener('vanilla-nested:fields-added', function(e){
     // e.type == 'vanilla-nested:fields-removed'
     // e.target == fields wrapper ""removed""
@@ -146,7 +148,7 @@ Triggered when the fields wrapper if fully hidden (aka ""removed""), that is: af
 #### 'vanilla-nested:fields-hidden'
 Triggered when the fields wrapper if hidden with an undo option.
 
-```
+``` Javascript
   document.addEventListener('vanilla-nested:fields-hidden', function(e){
     // e.type == 'vanilla-nested:fields-hidden'
     // e.target == fields wrapper hidden
@@ -163,7 +165,7 @@ Triggered when the fields wrapper if hidden with an undo option.
 #### 'vanila-nested:fields-hidden-undo'
 Triggered when the user undo the removal using the "undo" link.
 
-```
+``` Javascript
   document.addEventListener('vanilla-nested:fields-hidden-undo', function(e){
     // e.type == 'vanilla-nested:fields-hidden'
     // e.target == fields wrapper unhidden
