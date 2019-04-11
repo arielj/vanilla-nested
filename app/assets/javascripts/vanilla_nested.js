@@ -18,6 +18,8 @@
     const container = document.querySelector(btn.dataset.containerSelector);
     if (btn.dataset.methodForInsert == 'append') container.appendChild(toInsert);
     else if (btn.dataset.methodForInsert == 'prepend') container.insertBefore(toInsert, container.children[0]);
+
+    dispatchEvent(container, 'vanilla-nested:fields-added', btn, {added: toInsert})
   }
 
   function removeVanillaNestedFields(btn) {
@@ -26,8 +28,10 @@
 
     if (btn.dataset.undoTimeout) {
       hideFieldsWithUndo(wrapper, btn)
+      dispatchEvent(wrapper, 'vanilla-nested:fields-hidden', btn);
     } else {
       hideWrapper(wrapper);
+      dispatchEvent(wrapper, 'vanilla-nested:fields-removed', btn);
     }
     wrapper.querySelector('[name$="[_destroy]"]').value = '1';
   }
@@ -54,6 +58,7 @@
 
     let timer = setTimeout(function() {
       hideWrapper(wrapper)
+      dispatchEvent(wrapper, 'vanilla-nested:fields-removed', undoLink);
       undoLink.remove();
     }, ms)
 
@@ -61,7 +66,16 @@
       clearTimeout(timer);
       unhideFields(wrapper);
       wrapper.querySelector('[name$="[_destroy]"]').value = '0';
+      dispatchEvent(wrapper, 'vanila-nested:fields-hidden-undo', undoLink);
       undoLink.remove();
     })
+  }
+
+  function dispatchEvent(element, eventName, triggeredBy, details) {
+    if (!details) details = {};
+    details.triggeredBy = triggeredBy;
+
+    let event = new CustomEvent(eventName, {bubbles: true, detail: details})
+    element.dispatchEvent(event);
   }
 })()
