@@ -66,7 +66,7 @@
       clearTimeout(timer);
       unhideFields(wrapper);
       wrapper.querySelector('[name$="[_destroy]"]').value = '0';
-      dispatchEvent(wrapper, 'vanila-nested:fields-hidden-undo', undoLink);
+      dispatchEvent(wrapper, 'vanilla-nested:fields-hidden-undo', undoLink);
       undoLink.remove();
     })
   }
