@@ -21,7 +21,8 @@
   }
 
   function removeVanillaNestedFields(btn) {
-    const wrapper = btn.parentElement;
+    let wrapper = btn.parentElement;
+    if (sel = btn.dataset.fieldsWrapperSelector) wrapper = btn.closest(sel);
     wrapper.style.display = 'none';
     wrapper.querySelector('[name$="[_destroy]"]').value = '1';
   }
