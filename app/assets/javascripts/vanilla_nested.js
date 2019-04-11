@@ -60,6 +60,7 @@
     undoLink.addEventListener('click', function(e){
       clearTimeout(timer);
       unhideFields(wrapper);
+      wrapper.querySelector('[name$="[_destroy]"]').value = '0';
       undoLink.remove();
     })
   }
