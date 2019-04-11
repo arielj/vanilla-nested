@@ -85,7 +85,7 @@ link_to_add_nested(form, :order_items, '#order-items', partial_form_variable: :f
 
 # Customizing link_to_remove_nested
 #### Link text
-The default value is "X", but it can be changed using the parameter `link_text`:
+The default value is `"X"`, but it can be changed using the parameter `link_text`:
 
 ``` Ruby
 link_to_remove_nested(form, link_text: "remove")
@@ -116,9 +116,9 @@ link_to_remove_nested(ff, undo_link_timeout: 2000, undo_link_text: I18n.t('undo_
 ```
 
 Options are:
-* undo_link_timeout: miliseconds, greater than 0 to turn the feature on, default: `nil`
-* undo_link_text: string with the text of the link, great for internationalization, default: `'Undo'`
-* undo_link_classes: space separated string, default: `''`
+* `undo_link_timeout`: miliseconds, greater than 0 to turn the feature on, default: `nil`
+* `undo_link_text`: string with the text of the link, great for internationalization, default: `'Undo'`
+* `undo_link_classes`: space separated string, default: `''`
 
 # Events
 There are some events that you can listen to add custom callbacks on different moments. All events bubbles up the dom, so you can listen for them on any ancestor.
@@ -167,7 +167,7 @@ Triggered when the user undo the removal using the "undo" link.
 
 ``` Javascript
   document.addEventListener('vanilla-nested:fields-hidden-undo', function(e){
-    // e.type == 'vanilla-nested:fields-hidden'
+    // e.type == 'vanilla-nested:fields-hidden-undo'
     // e.target == fields wrapper unhidden
     // e.detail.triggerdBy == the "undo" link
   })
