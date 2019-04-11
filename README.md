@@ -162,7 +162,7 @@ Triggered when the fields wrapper if hidden with an undo option.
 > * If there's no "undo" action configured, the wrapped is set to `display: none` and considered "removed".
 > * If you use the "undo" feature, first the children of the wrapper are hidden (triggering the `hidden` event) and then, after the timeout passes, the wrapper is set to `display: none` (triggering the `removed` event).
 
-#### 'vanila-nested:fields-hidden-undo'
+#### 'vanilla-nested:fields-hidden-undo'
 Triggered when the user undo the removal using the "undo" link.
 
 ``` Javascript
