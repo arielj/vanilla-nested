@@ -117,3 +117,56 @@ Options are:
 * undo_link_timeout: miliseconds, greater than 0 to turn the feature on, default: `nil`
 * undo_link_text: string with the text of the link, great for internationalization, default: `'Undo'`
 * undo_link_classes: space separated string, default: `''`
+
+# Events
+There are some events that you can listen to add custom callbacks on different moments. All events bubbles up the dom, so you can listen for them on any ancestor.
+
+#### 'vanilla-nested:fields-added'
+Triggered right after the fields wrapper was inserted on the container.
+
+```
+  document.addEventListener('vanilla-nested:fields-added', function(e){
+    // e.type == 'vanilla-nested:fields-added'
+    // e.target == container div of the fields
+    // e.detail.triggerdBy == the "add" link
+    // e.detail.added == the fields wrapper just inserted
+  })
+```
+
+#### 'vanilla-nested:fields-removed'
+Triggered when the fields wrapper if fully hidden (aka ""removed""), that is: after clicking the "remove" link with no timeout OR after the timeout finished.
+
+```
+  document.addEventListener('vanilla-nested:fields-added', function(e){
+    // e.type == 'vanilla-nested:fields-removed'
+    // e.target == fields wrapper ""removed""
+    // e.detail.triggerdBy == the "remove" link if no undo action, the 'undo' link if it was triggered by the timeout })
+```
+
+#### 'vanilla-nested:fields-hidden'
+Triggered when the fields wrapper if hidden with an undo option.
+
+```
+  document.addEventListener('vanilla-nested:fields-hidden', function(e){
+    // e.type == 'vanilla-nested:fields-hidden'
+    // e.target == fields wrapper hidden
+    // e.detail.triggerdBy == the "remove" link
+  })
+```
+
+> **Remove vs Hidden**
+>
+> Behind the scene, the wrapper is never actually removed, because we need to send the `[_destroy]` parameter. But there are 2 different stages when removing it.
+> * If there's no "undo" action configured, the wrapped is set to `display: none` and considered "removed".
+> * If you use the "undo" feature, first the children of the wrapper are hidden (triggering the `hidden` event) and then, after the timeout passes, the wrapper is set to `display: none` (triggering the `removed` event).
+
+#### 'vanila-nested:fields-hidden-undo'
+Triggered when the user undo the removal using the "undo" link.
+
+```
+  document.addEventListener('vanilla-nested:fields-hidden-undo', function(e){
+    // e.type == 'vanilla-nested:fields-hidden'
+    // e.target == fields wrapper unhidden
+    // e.detail.triggerdBy == the "undo" link
+  })
+```
