@@ -107,3 +107,13 @@ By default, the link to remove the fields assumes it's a direct child of the wra
 Note that:
 * The link MUST be a descendant of the fields wrapper, it may not be a direct child, but the look up of the wrapper uses javascript's `closest()` method, so it looks on the ancestors.
 * Since this uses javascript's `closest()`, there is no IE supported (https://caniuse.com/#search=closest). You may want to add a polyfill or define the method manually if you need to support it.
+
+#### Undoing
+You can tell the plugin to add an "undo" link right after removing the fields (as a direct child of the fields wrapper! this is not customizable!).
+
+```link_to_remove_nested(ff, undo_link_timeout: 2000, undo_link_text: I18n.t('undo_remove_fields'), undo_link_classes: 'btn btn-secondary')```
+
+Options are:
+* undo_link_timeout: miliseconds, greater than 0 to turn the feature on, default: `nil`
+* undo_link_text: string with the text of the link, great for internationalization, default: `'Undo'`
+* undo_link_classes: space separated string, default: `''`
