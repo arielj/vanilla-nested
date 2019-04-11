@@ -23,7 +23,44 @@
   function removeVanillaNestedFields(btn) {
     let wrapper = btn.parentElement;
     if (sel = btn.dataset.fieldsWrapperSelector) wrapper = btn.closest(sel);
-    wrapper.style.display = 'none';
+
+    if (btn.dataset.undoTimeout) {
+      hideFieldsWithUndo(wrapper, btn)
+    } else {
+      hideWrapper(wrapper);
+    }
     wrapper.querySelector('[name$="[_destroy]"]').value = '1';
+  }
+
+  function hideWrapper(wrapper) {
+    wrapper.style.display = 'none';
+    unhideFields(wrapper);
+  }
+
+  function unhideFields(wrapper) {
+    [...wrapper.children].forEach(child => child.style.display = 'initial');
+  }
+
+  function hideFieldsWithUndo(wrapper, btn) {
+    let ms = btn.dataset.undoTimeout;
+
+    [...wrapper.children].forEach(child => child.style.display = 'none');
+
+    const undoLink = document.createElement('A');
+    undoLink.classList.add('vanilla-nested-undo');
+    if (classes = btn.dataset.undoLinkClasses) undoLink.classList.add(...classes.split(' '));
+    undoLink.innerText = btn.dataset.undoText;
+    wrapper.appendChild(undoLink);
+
+    let timer = setTimeout(function() {
+      hideWrapper(wrapper)
+      undoLink.remove();
+    }, ms)
+
+    undoLink.addEventListener('click', function(e){
+      clearTimeout(timer);
+      unhideFields(wrapper);
+      undoLink.remove();
+    })
   }
 })()

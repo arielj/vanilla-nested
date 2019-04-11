@@ -20,10 +20,10 @@ module VanillaNested
       end
     end
 
-    def link_to_remove_nested(form, link_text: 'X', fields_wrapper_selector: nil)
+    def link_to_remove_nested(form, link_text: 'X', fields_wrapper_selector: nil, undo_link_timeout: nil, undo_link_text: 'Undo', undo_link_classes: '')
       capture do
         concat form.hidden_field(:_destroy, value: 0)
-        concat link_to(link_text, '#', class: 'vanilla-nested-remove', data: {'fields-wrapper-selector': fields_wrapper_selector})
+        concat link_to(link_text, '#', class: 'vanilla-nested-remove', data: {'fields-wrapper-selector': fields_wrapper_selector, 'undo-timeout': undo_link_timeout, 'undo-text': undo_link_text, 'undo-link-classes': undo_link_classes})
       end
     end
   end
