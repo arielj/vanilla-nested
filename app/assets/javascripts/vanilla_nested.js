@@ -12,14 +12,21 @@
   })
 
   function addVanillaNestedFields(btn) {
-    const auxDiv = document.createElement('div');
-    auxDiv.innerHTML = btn.dataset.html.replace(/_idx_placeholder_/g, Date.now());
-    const toInsert = auxDiv.children[0];
+    const newHtml = btn.dataset.html.replace(/_idx_placeholder_/g, Date.now());
     const container = document.querySelector(btn.dataset.containerSelector);
-    if (btn.dataset.methodForInsert == 'append') container.appendChild(toInsert);
-    else if (btn.dataset.methodForInsert == 'prepend') container.insertBefore(toInsert, container.children[0]);
 
-    dispatchEvent(container, 'vanilla-nested:fields-added', btn, {added: toInsert})
+    let inserted;
+    switch (btn.dataset.methodForInsert) {
+      case ('append'):
+        container.insertAdjacentHTML('beforeend', newHtml);
+        inserted = container.lastElementChild;
+        break;
+      case ('prepend'):
+        container.insertAdjacentHTML('afterbegin', newHtml);
+        inserted = container.firstElementChild;
+        break;
+    }
+    dispatchEvent(container, 'vanilla-nested:fields-added', btn, {added: inserted})
   }
 
   function removeVanillaNestedFields(btn) {
