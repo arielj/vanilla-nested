@@ -15,7 +15,7 @@ module VanillaNested
       methodForInsert = [:append, :prepend].include?(insert_method.to_sym) ? insert_method : :append
 
       classes = "vanilla-nested-add #{link_classes}"
-      link_to '#', class: classes, data: {'container-selector': container_selector, html: html, 'method-for-insert': methodForInsert} do
+      link_to '#', class: classes, onclick: 'addVanillaNestedFields(event)', data: {'container-selector': container_selector, html: html, 'method-for-insert': methodForInsert} do
         link_text || "Add #{association_class.model_name}"
       end
     end
@@ -23,7 +23,7 @@ module VanillaNested
     def link_to_remove_nested(form, link_text: 'X', fields_wrapper_selector: nil, undo_link_timeout: nil, undo_link_text: 'Undo', undo_link_classes: '')
       capture do
         concat form.hidden_field(:_destroy, value: 0)
-        concat link_to(link_text, '#', class: 'vanilla-nested-remove', data: {'fields-wrapper-selector': fields_wrapper_selector, 'undo-timeout': undo_link_timeout, 'undo-text': undo_link_text, 'undo-link-classes': undo_link_classes})
+        concat link_to(link_text, '#', class: 'vanilla-nested-remove', onclick: 'removeVanillaNestedFields(event)', data: {'fields-wrapper-selector': fields_wrapper_selector, 'undo-timeout': undo_link_timeout, 'undo-text': undo_link_text, 'undo-link-classes': undo_link_classes})
       end
     end
   end
