@@ -4,11 +4,9 @@ Rails dynamic nested forms using vanilla JS
 Similar to cocoon, but with no jquery dependency!
 
 # Installation
-For now, it can only be used from github
+Just add it to your gemfile
 
-```gem 'vanilla_nested', git: 'https://github.com/arielj/vanilla-nested', branch: 'master'```
-
-If you already have it installed and need to update it, run `bundle update --source vanilla_nested`.
+```gem 'vanilla_nested'```
 
 # Usage
 
@@ -25,7 +23,7 @@ If you already have it installed and need to update it, run `bundle update --sou
 # order/form.html.erb
 <%= form_for product do |form| %>
   <%= form.text_field :attr %>
-  
+
   <%= link_to_add_nested(form, :order_items, '#order-items') # adds a link to add more items %>
   <div id='order-items'>
     <%= f.fields_for :order_items do |order_item_f| %>
