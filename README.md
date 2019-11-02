@@ -170,3 +170,8 @@ Triggered when the user undo the removal using the "undo" link.
     // e.detail.triggerdBy == the "undo" link
   })
 ```
+
+### Using Webpacker
+For now, if you want to use this with webpacker, download the .js file*, put in inside `app/javascript` folder and import it on your `application.js` using `import 'vanilla-nested.js'`.
+
+* https://github.com/arielj/vanilla-nested/blob/master/app/assets/javascripts/vanilla_nested.js
