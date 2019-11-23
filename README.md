@@ -170,3 +170,26 @@ Triggered when the user undo the removal using the "undo" link.
     // e.detail.triggerdBy == the "undo" link
   })
 ```
+
+
+# Changes from 1.0.0 to 1.1.0
+
+#### Change the method to infere the name of the partial
+Before, it used `SomeClass.name.downcase`, this created a problem for classes with more than one word:
+- User => 'user_fields'
+- SomeClass => 'someclass_fields'
+
+Now it uses `SomeClass.name.underscore`:
+- User => 'user_fields'
+- SomeClass => 'some_class_fields'
+
+If you used the old version, you'll need to change the partial name or provide the old name as the `partial:` argument.
+
+#### Fix some Rubocop style suggestions
+Mostly se of single/double quotes, spacing, etc.
+
+#### Added some Solagraph related doc for the view helpers
+Just so Solargraph plugins on editors like VS-Code can give you some documentation.
+
+#### Added some documentation on the code
+Mostly on the javascript code

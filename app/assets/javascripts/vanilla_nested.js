@@ -1,6 +1,9 @@
 (function(){
+  // Get the html from the data attribute and insert the new fields on the container
+  // "event" is the click event of the link created by the rails helper
   window.addVanillaNestedFields = function(event) {
     event.preventDefault();
+
     const element = event.target;
     const data = element.dataset;
     const newHtml = data.html.replace(/_idx_placeholder_/g, Date.now());
@@ -17,11 +20,15 @@
         inserted = container.firstElementChild;
         break;
     }
+
     _dispatchEvent(container, 'vanilla-nested:fields-added', element, {added: inserted})
   }
 
+  // Removes the fields or hides them until the undo timer times out
+  // "event" is the click event of the link created by the rails helper
   window.removeVanillaNestedFields = function(event) {
     event.preventDefault();
+
     const element = event.target;
     const data = element.dataset;
     let wrapper = element.parentElement;
@@ -38,14 +45,21 @@
     wrapper.querySelector('[name$="[_destroy]"]').value = '1';
   }
 
+  // Hides an element, mainly the wrapper of a group of fields
+  // "wrapper" is the wrapper of the link to remove fields
   function hideWrapper(wrapper) {
     wrapper.style.display = 'none';
   }
 
+  // Unhides the children given a fields wrapper
+  // "wrapper" is the wrapper of the link to remove fields
   function unhideFields(wrapper) {
     [...wrapper.children].forEach(child => child.style.display = 'initial');
   }
 
+  // Hides an element and adds an "undo" link to unhide it
+  // "wrapper" is the wrapper to hide
+  // "element" is the link to remove the wrapper
   function hideFieldsWithUndo(wrapper, element) {
     [...wrapper.children].forEach(child => child.style.display = 'none');
 
@@ -75,8 +89,6 @@
     let ms = element.dataset.undoTimeout;
     let timer = setTimeout(_onTimerCompleted, ms);
   }
-
-
 
   function _dispatchEvent(element, eventName, triggeredBy, details) {
     if (!details) details = {};
