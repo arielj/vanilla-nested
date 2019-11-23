@@ -170,7 +170,8 @@ Triggered when the user undo the removal using the "undo" link.
     // e.detail.triggerdBy == the "undo" link
   })
 ```
-
+## Using Webpacker
+For now, if you want to use this with webpacker, download the .js file*, put in inside `app/javascript` folder and import it on your `application.js` using `import 'vanilla-nested.js'`.
 
 # Changes from 1.0.0 to 1.1.0
 
@@ -186,7 +187,7 @@ Now it uses `SomeClass.name.underscore`:
 If you used the old version, you'll need to change the partial name or provide the old name as the `partial:` argument.
 
 #### Fix some Rubocop style suggestions
-Mostly se of single/double quotes, spacing, etc.
+Mostly single/double quotes, spacing, etc.
 
 #### Added some Solagraph related doc for the view helpers
 Just so Solargraph plugins on editors like VS-Code can give you some documentation.
