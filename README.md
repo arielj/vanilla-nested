@@ -133,7 +133,7 @@ Triggered right after the fields wrapper was inserted on the container.
   })
 ```
 
-#### 'vanilla-nested:fields-added'
+#### 'vanilla-nested:fields-limit-reached'
 Triggered right after the fields wrapper was inserted on the container if the current count is >= limit, where limit is the value configured on the model: `accepts_nested_attributes_for :assoc, limit: 5`. You can listen to this event to disable the "add" link for example, or to show a warning.
 
 ``` Javascript
