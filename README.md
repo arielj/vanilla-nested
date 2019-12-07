@@ -133,6 +133,17 @@ Triggered right after the fields wrapper was inserted on the container.
   })
 ```
 
+#### 'vanilla-nested:fields-added'
+Triggered right after the fields wrapper was inserted on the container if the current count is >= limit, where limit is the value configured on the model: `accepts_nested_attributes_for :assoc, limit: 5`. You can listen to this event to disable the "add" link for example, or to show a warning.
+
+``` Javascript
+  document.addEventListener('vanilla-nested:fields-limit-reached', function(e){
+    // e.type == 'vanilla-nested:fields-added'
+    // e.target == container div of the fields
+    // e.detail.triggerdBy == the "add" link
+  })
+```
+
 #### 'vanilla-nested:fields-removed'
 Triggered when the fields wrapper if fully hidden (aka ""removed""), that is: after clicking the "remove" link with no timeout OR after the timeout finished.
 
@@ -194,3 +205,10 @@ Just so Solargraph plugins on editors like VS-Code can give you some documentati
 
 #### Added some documentation on the code
 Mostly on the javascript code
+
+
+# Changes from 1.1.0 to 1.2.0
+
+#### New event for the "limit" option of `accepts_nested_attributes_for`
+You can listen to the `vanilla-nested:fields-limit-reached` event that will fire when container has more or equals the amount of children than the `limit` option set on the `accepts_nested_attributes_for` configuration.
+

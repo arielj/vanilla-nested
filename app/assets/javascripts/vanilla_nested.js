@@ -6,8 +6,8 @@
 
     const element = event.target;
     const data = element.dataset;
-    const newHtml = data.html.replace(/_idx_placeholder_/g, Date.now());
     const container = document.querySelector(data.containerSelector);
+    const newHtml = data.html.replace(/_idx_placeholder_/g, Date.now());
 
     let inserted;
     switch (data.methodForInsert) {
@@ -22,6 +22,13 @@
     }
 
     _dispatchEvent(container, 'vanilla-nested:fields-added', element, {added: inserted})
+
+    // dispatch an event if we reached the limit configured on the model
+    if (data.limit) {
+      let nestedElements = container.children.length;
+      if (nestedElements >= data.limit)
+        _dispatchEvent(container, 'vanilla-nested:fields-limit-reached', element)
+    }
   }
 
   // Removes the fields or hides them until the undo timer times out

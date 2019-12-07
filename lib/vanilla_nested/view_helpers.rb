@@ -31,6 +31,9 @@ module VanillaNested
         'method-for-insert': method_for_insert
       }
 
+      nested_options = form.object.class.nested_attributes_options[association.to_sym]
+      data['limit'] = nested_options[:limit] if nested_options[:limit]
+
       link_to '#', class: classes, onclick: 'addVanillaNestedFields(event)', data: data do
         link_text || "Add #{association_class.model_name}"
       end
