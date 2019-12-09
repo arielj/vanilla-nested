@@ -148,7 +148,7 @@ Triggered right after the fields wrapper was inserted on the container if the cu
 Triggered when the fields wrapper if fully hidden (aka ""removed""), that is: after clicking the "remove" link with no timeout OR after the timeout finished.
 
 ``` Javascript
-  document.addEventListener('vanilla-nested:fields-added', function(e){
+  document.addEventListener('vanilla-nested:fields-removed', function(e){
     // e.type == 'vanilla-nested:fields-removed'
     // e.target == fields wrapper ""removed""
     // e.detail.triggerdBy == the "remove" link if no undo action, the 'undo' link if it was triggered by the timeout })
