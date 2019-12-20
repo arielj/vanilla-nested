@@ -141,7 +141,7 @@ Triggered right after the fields wrapper was inserted on the container.
   })
 ```
 
-#### 'vanilla-nested:fields-added'
+#### 'vanilla-nested:fields-limit-reached'
 Triggered right after the fields wrapper was inserted on the container if the current count is >= limit, where limit is the value configured on the model: `accepts_nested_attributes_for :assoc, limit: 5`. You can listen to this event to disable the "add" link for example, or to show a warning.
 
 ``` Javascript
@@ -156,7 +156,7 @@ Triggered right after the fields wrapper was inserted on the container if the cu
 Triggered when the fields wrapper if fully hidden (aka ""removed""), that is: after clicking the "remove" link with no timeout OR after the timeout finished.
 
 ``` Javascript
-  document.addEventListener('vanilla-nested:fields-added', function(e){
+  document.addEventListener('vanilla-nested:fields-removed', function(e){
     // e.type == 'vanilla-nested:fields-removed'
     // e.target == fields wrapper ""removed""
     // e.detail.triggerdBy == the "remove" link if no undo action, the 'undo' link if it was triggered by the timeout })
