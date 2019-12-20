@@ -34,7 +34,7 @@ module VanillaNested
       nested_options = form.object.class.nested_attributes_options[association.to_sym]
       data['limit'] = nested_options[:limit] if nested_options[:limit]
 
-      link_to '#', class: classes, onclick: 'addVanillaNestedFields(event)', data: data do
+      link_to '#', class: classes, data: data do
         link_text || "Add #{association_class.model_name}"
       end
     end
@@ -56,7 +56,7 @@ module VanillaNested
 
       capture do
         concat form.hidden_field(:_destroy, value: 0)
-        concat link_to(link_text, '#', class: 'vanilla-nested-remove', onclick: 'removeVanillaNestedFields(event)', data: data)
+        concat link_to(link_text, '#', class: 'vanilla-nested-remove', data: data)
       end
     end
   end

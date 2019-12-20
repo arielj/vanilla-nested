@@ -8,6 +8,14 @@ Just add it to your gemfile
 
 ```gem 'vanilla_nested'```
 
+If you are using Sprockets, just require the js
+
+```//= require vanilla_nested```
+
+If you use Webpacker, you need to copy the js file into your app/javascript folder and then import it using
+
+```import '../vanilla_nested.js'```
+
 # Usage
 
 ``` HTML+ERB
@@ -182,7 +190,7 @@ Triggered when the user undo the removal using the "undo" link.
   })
 ```
 ## Using Webpacker
-For now, if you want to use this with webpacker, download the .js file*, put in inside `app/javascript` folder and import it on your `application.js` using `import 'vanilla-nested.js'`.
+For now, if you want to use this with webpacker, download the vanilla_nested.js file, put in inside `app/javascript` folder and import it on your `application.js` using `import '../vanilla_nested.js'`.
 
 # Changes from 1.0.0 to 1.1.0
 
@@ -211,4 +219,9 @@ Mostly on the javascript code
 
 #### New event for the "limit" option of `accepts_nested_attributes_for`
 You can listen to the `vanilla-nested:fields-limit-reached` event that will fire when container has more or equals the amount of children than the `limit` option set on the `accepts_nested_attributes_for` configuration.
+
+# Changes from 1.2.0 to 1.2.1
+
+#### Remvoe "onclick" attribute for helpers and add event listeners within js
+If you were using webpacker, remember to replace the vanilla_nested.js file in your app/javascript folder
 

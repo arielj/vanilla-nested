@@ -23,6 +23,10 @@
 
     _dispatchEvent(container, 'vanilla-nested:fields-added', element, {added: inserted})
 
+    let removeLink = inserted.querySelector('.vanilla-nested-remove');
+    if (removeLink)
+      removeLink.addEventListener('click', removeVanillaNestedFields);
+
     // dispatch an event if we reached the limit configured on the model
     if (data.limit) {
       let nestedElements = container.children.length;
@@ -116,4 +120,14 @@
 
     return undo;
   }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.vanilla-nested-add').forEach(el => {
+      el.addEventListener('click', addVanillaNestedFields);
+    })
+
+    document.querySelectorAll('.vanilla-nested-remove').forEach(el => {
+      el.addEventListener('click', removeVanillaNestedFields);
+    })
+  })
 })()
