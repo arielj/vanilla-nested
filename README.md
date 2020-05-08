@@ -257,4 +257,4 @@ If you were using webpacker, remember to replace the vanilla_nested.js file in y
 You can set multiple classes for the "X" link
 
 #### Added a "link_content" block parameter for both link helpers
-You can pass a block as to use as the content for the add and remove links
+You can pass a block to use as the content for the add and remove links
