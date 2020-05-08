@@ -9,8 +9,9 @@ module VanillaNested
     # @param link_classes [String] space separated classes for the link tag
     # @param insert_method [:append, :prepend] tells javascript if the new fields should be appended or prepended to the container
     # @param partial_form_variable [String, Symbol] name of the variable that represents the form builder inside the fields partial
+    # @param link_content [Block] block of code for the link content
     # @return [String] link tag
-    def link_to_add_nested(form, association, container_selector, link_text: nil, link_classes: '', insert_method: :append, partial: nil, partial_form_variable: :form)
+    def link_to_add_nested(form, association, container_selector, link_text: nil, link_classes: '', insert_method: :append, partial: nil, partial_form_variable: :form, &link_content)
       association_class = form.object.class.reflections[association.to_s].klass
       object = association_class.new
 
@@ -34,8 +35,11 @@ module VanillaNested
       nested_options = form.object.class.nested_attributes_options[association.to_sym]
       data['limit'] = nested_options[:limit] if nested_options[:limit]
 
-      link_to '#', class: classes, data: data do
-        link_text || "Add #{association_class.model_name}"
+      if block_given?
+        link_to '#', class: classes, data: data, &link_content
+      else
+        text = link_text || "Add #{association_class.model_name}"
+        link_to text, '#', class: classes, data: data
       end
     end
 
@@ -44,9 +48,11 @@ module VanillaNested
     # @param fields_wrapper_selector [String] selector for the wrapper of the fields, must be an ancestor
     # @param undo_link_timeout [Integer] time until undo timeouts
     # @param undo_link_text [String] text to show as "undo"
-    # @param undo_link_classes [String] space separated list of classes
+    # @param undo_link_classes [String] space separated list of classes for the "undo" link
+    # @param ulink_classes [String] space separated list of classes for the "x" link
+    # @param link_content [Block] block of code for the link content
     # @return [String] hidden field and link tag
-    def link_to_remove_nested(form, link_text: 'X', fields_wrapper_selector: nil, undo_link_timeout: nil, undo_link_text: 'Undo', undo_link_classes: '')
+    def link_to_remove_nested(form, link_text: 'X', fields_wrapper_selector: nil, undo_link_timeout: nil, undo_link_text: 'Undo', undo_link_classes: '', link_classes: '', &link_content)
       data = {
         'fields-wrapper-selector': fields_wrapper_selector,
         'undo-timeout': undo_link_timeout,
@@ -54,9 +60,17 @@ module VanillaNested
         'undo-link-classes': undo_link_classes
       }
 
+      classes = "vanilla-nested-remove #{link_classes}"
+
       capture do
         concat form.hidden_field(:_destroy, value: 0)
-        concat link_to(link_text, '#', class: 'vanilla-nested-remove', data: data)
+        concat(
+          if block_given?
+            link_to('#', class: classes, data: data, &link_content)
+          else
+            link_to(link_text.html_safe, '#', class: classes, data: data)
+          end
+        )
       end
     end
   end

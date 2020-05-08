@@ -54,7 +54,7 @@ link_to_add_nested(form, :order_items, '#order-items', link_text: I18n.t(:some_k
 ```
 This way you can, for example, internationalize the text.
 
-#### Link class
+#### Link classes
 By default, the link to add new fields has the class `vanilla-nested-add` which is required, but you can add more classes passing a string:
 ``` Ruby
 link_to_add_nested(form, :order_items, '#order-items', link_classes: 'btn btn-primary')
@@ -89,6 +89,16 @@ link_to_add_nested(form, :order_items, '#order-items', partial: 'my_partial')
 link_to_add_nested(form, :order_items, '#order-items', partial_form_variable: :ff)
 ```
 
+#### Link content
+If you need html content, you can use a block:
+
+```erb
+<%= link_to_add_nested(form, :order_items, '#order-items') do %>
+  <i class='fa fa-plus'>
+<% end %>
+```
+
+
 # Customizing link_to_remove_nested
 #### Link text
 The default value is `"X"`, but it can be changed using the parameter `link_text`:
@@ -96,6 +106,22 @@ The default value is `"X"`, but it can be changed using the parameter `link_text
 ``` Ruby
 link_to_remove_nested(form, link_text: "remove")
 ```
+
+#### Link content
+If you need html content, you can use a block:
+
+```erb
+<%= link_to_remove_nested(form) do %>
+  <i class='fa fa-trash'>
+<% end %>
+```
+
+#### Link classes
+By default, the link to remove fields has the class `vanilla-nested-remove` which is required, but you can add more classes passing a space separated string:
+``` Ruby
+link_to_remove_nested(form, link_classes: 'btn btn-primary')
+```
+This way you can style the link with no need of targeting the specific vanilla nested class.
 
 #### Fields wrapper
 By default, the link to remove the fields assumes it's a direct child of the wrapper of the fields. You can customize this if you can't make it a direct child.
@@ -222,6 +248,13 @@ You can listen to the `vanilla-nested:fields-limit-reached` event that will fire
 
 # Changes from 1.2.0 to 1.2.1
 
-#### Remvoe "onclick" attribute for helpers and add event listeners within js
+#### Removed "onclick" attribute for helpers and add event listeners within js
 If you were using webpacker, remember to replace the vanilla_nested.js file in your app/javascript folder
 
+# Changes from 1.2.1 to 1.2.2
+
+#### Added "link_classes" option to "link_to_remove_nested"
+You can set multiple classes for the "X" link
+
+#### Added a "link_content" block parameter for both link helpers
+You can pass a block as to use as the content for the add and remove links
