@@ -12,9 +12,13 @@ If you are using Sprockets, just require the js
 
 ```//= require vanilla_nested```
 
-If you use Webpacker, you need to copy the js file into your app/javascript folder and then import it using
+If you use Webpacker, add the package also (gem is required for the helper methods) using:
 
-```import '../vanilla_nested.js'```
+```yarn add arielj/vanilla-nested```
+
+And then use it in your application.js as:
+
+```import 'vanilla-nested'```
 
 # Usage
 
@@ -240,6 +244,8 @@ Just so Solargraph plugins on editors like VS-Code can give you some documentati
 #### Added some documentation on the code
 Mostly on the javascript code
 
+#### Added node module config
+So it can be used as a node module using yarn to integrate it using webpacker.
 
 # Changes from 1.1.0 to 1.2.0
 
