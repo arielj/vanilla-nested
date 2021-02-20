@@ -27,7 +27,11 @@ jobs:
           bundle install --jobs 4 --retry 3
           yarn install
       - name: Unit tests
-        run: rails test
+        run: |
+          cd test/VanillaNestedTests
+          rails test
       - name: System tests
-        run: rails test:system
+        run: |
+          cd test/VanillaNestedTests
+          rails test:system
           
