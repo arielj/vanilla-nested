@@ -27,9 +27,15 @@ jobs:
       - name: WD
         run: pwd
       - name: Yarn
-        run: yarn install
+        run: |
+          pwd
+          yarn install
       - name: Unit tests
-        run: rails test
+        run: |
+          pwd
+          bundle exec rails test
       - name: System tests
-        run: rails test:system
+        run: |
+          pwd
+          bundle exec rails test:system
           
