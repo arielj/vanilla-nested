@@ -38,7 +38,7 @@ And then use it in your application.js as:
 
   <%= link_to_add_nested(form, :order_items, '#order-items') # adds a link to add more items %>
   <div id='order-items'>
-    <%= f.fields_for :order_items do |order_item_f| %>
+    <%= form.fields_for :order_items do |order_item_f| %>
       <%= render 'order_item_fields', form: order_item_f %>
     <% end %>
   </div>
@@ -219,8 +219,17 @@ Triggered when the user undo the removal using the "undo" link.
     // e.detail.triggerdBy == the "undo" link
   })
 ```
+
 ## Using Webpacker
 For now, if you want to use this with webpacker, download the vanilla_nested.js file, put in inside `app/javascript` folder and import it on your `application.js` using `import '../vanilla_nested.js'`.
+
+## Testing
+
+You can run the tests following these commands:
+- cd test/VanillaNestedTests # move to the rails app dir
+- bin/setup # install bundler, gems and yarn packages
+- rails test # unit tests
+- rails test:system # system tests
 
 # Changes from 1.0.0 to 1.1.0
 
