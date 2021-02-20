@@ -1,0 +1,33 @@
+# .github/workflows/ci.yml
+
+name: CI
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+          bundler-cache: true
+      - name: Build
+        run: |
+          cd test/VanillaNestedTests
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+          yarn install
+      - name: Unit tests
+        run: rails test
+      - name: System tests
+        run: rails test:system
+          
