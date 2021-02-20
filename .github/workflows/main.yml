@@ -19,12 +19,11 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
+          working-directory: test/VanillaNestedTests
           bundler-cache: true
-      - name: Build
+      - name: Yarn
         run: |
           cd test/VanillaNestedTests
-          gem install bundler
-          bundle install --jobs 4 --retry 3
           yarn install
       - name: Unit tests
         run: |
