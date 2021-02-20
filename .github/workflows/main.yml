@@ -24,12 +24,11 @@ jobs:
           ruby-version: 2.6
           working-directory: test/VanillaNestedTests
           bundler-cache: true
-      - name: WD
-        run: pwd
-      - name: Yarn
-        run: |
-          pwd
-          yarn install
+      - name: YARN
+        uses: bahmutov/npm-install@v1
+        with:
+          working-directory: test/VanillaNestedTests
+          install-command: yarn --frozen-lockfile --silent
       - name: Unit tests
         run: |
           pwd
