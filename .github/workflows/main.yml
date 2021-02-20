@@ -8,6 +8,7 @@ on:
   pull_request:
     branches:
     - master
+
 defaults:
   run:
     working-directory: ./test/VanillaNestedTests
@@ -30,11 +31,7 @@ jobs:
           working-directory: test/VanillaNestedTests
           install-command: yarn --frozen-lockfile --silent
       - name: Unit tests
-        run: |
-          pwd
-          bundle exec rails test
+        run: bundle exec rails test
       - name: System tests
-        run: |
-          pwd
-          bundle exec rails test:system
+        run: bundle exec rails test:system
           
