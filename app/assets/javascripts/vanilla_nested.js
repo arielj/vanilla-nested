@@ -4,7 +4,10 @@
   window.addVanillaNestedFields = function(event) {
     event.preventDefault();
 
-    const element = event.target;
+    let element = event.target;
+    if (!element.classList.contains('vanilla-nested-add'))
+      element = element.closest('.vanilla-nested-add')
+
     const data = element.dataset;
     const container = document.querySelector(data.containerSelector);
     const newHtml = data.html.replace(/_idx_placeholder_/g, Date.now());
@@ -126,7 +129,7 @@
 
   document.addEventListener('DOMContentLoaded', function(){
     document.querySelectorAll('.vanilla-nested-add').forEach(el => {
-      el.addEventListener('click', addVanillaNestedFields);
+      el.addEventListener('click', addVanillaNestedFields, true);
     })
 
     document.querySelectorAll('.vanilla-nested-remove').forEach(el => {
