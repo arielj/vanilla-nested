@@ -25,7 +25,7 @@
 
     let removeLink = inserted.querySelector('.vanilla-nested-remove');
     if (removeLink)
-      removeLink.addEventListener('click', removeVanillaNestedFields);
+      removeLink.addEventListener('click', removeVanillaNestedFields, true);
 
     // dispatch an event if we reached the limit configured on the model
     if (data.limit) {
@@ -40,7 +40,10 @@
   window.removeVanillaNestedFields = function(event) {
     event.preventDefault();
 
-    const element = event.target;
+    let element = event.target;
+    if (!element.classList.contains('vanilla-nested-remove'))
+      element = element.closest('.vanilla-nested-remove')
+
     const data = element.dataset;
     let wrapper = element.parentElement;
     if (sel = data.fieldsWrapperSelector) wrapper = element.closest(sel);
@@ -127,7 +130,7 @@
     })
 
     document.querySelectorAll('.vanilla-nested-remove').forEach(el => {
-      el.addEventListener('click', removeVanillaNestedFields);
+      el.addEventListener('click', removeVanillaNestedFields, true);
     })
   })
 })()
