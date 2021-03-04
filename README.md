@@ -20,6 +20,26 @@ And then use it in your application.js as:
 
 ```import 'vanilla-nested'```
 
+# Update
+
+To update the gem use either:
+
+```
+gem update vanilla_nested # if using the gem from rubygems
+
+# or
+
+gem update --source vanilla_nested # if using the gem from github
+```
+
+If using webpacker, you need to update the node package too with:
+
+```
+yarn upgrade vanilla-nested
+```
+
+> You can clear the webpacker cache just in case if changes are not reflecting with `rails webpacker:clobber`
+
 # Usage
 
 ``` HTML+ERB
@@ -273,3 +293,16 @@ You can set multiple classes for the "X" link
 
 #### Added a "link_content" block parameter for both link helpers
 You can pass a block to use as the content for the add and remove links
+
+# Changes from 1.2.2 to 1.2.3
+
+#### Fix using nested html elements as the content for buttons
+There was an error when using the helpers with things like:
+
+```erb
+<%= link_to_add_nested(form, :pets, '#pets') do %>
+  <span>Add Pet</span>
+<% end %>
+```
+
+It would detect the wrong element for the click event, making the JS fail.
