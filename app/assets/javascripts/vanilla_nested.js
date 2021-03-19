@@ -127,7 +127,7 @@
     return undo;
   }
 
-  document.addEventListener('DOMContentLoaded', function(){
+  function initVanillaNested() {
     document.querySelectorAll('.vanilla-nested-add').forEach(el => {
       el.addEventListener('click', addVanillaNestedFields, true);
     })
@@ -135,5 +135,16 @@
     document.querySelectorAll('.vanilla-nested-remove').forEach(el => {
       el.addEventListener('click', removeVanillaNestedFields, true);
     })
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    initVanillaNested();
+  })
+
+  // Don't run turbolinks event callback for first load, we already do it with DOMContentLoaded
+  const notEmpty = (obj) => Object.keys(obj).length;
+
+  document.addEventListener('turbolinks:load', function(e){
+    if (notEmpty(e.data.timing)) initVanillaNested();
   })
 })()

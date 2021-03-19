@@ -2,7 +2,8 @@ require "application_system_test_case"
 
 class VanillaNestedTest < ApplicationSystemTestCase
   test "adds/removes fields" do
-    visit new_user_path
+    visit users_path
+    click_link 'New User'
 
     assert_selector '#new_user'
 
