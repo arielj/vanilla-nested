@@ -306,3 +306,7 @@ There was an error when using the helpers with things like:
 ```
 
 It would detect the wrong element for the click event, making the JS fail.
+
+# Changes from 1.2.3 to 1.2.4
+
+Play nicely with Turbolinks' `turbolinks:load` event.
