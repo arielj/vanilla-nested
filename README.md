@@ -6,7 +6,10 @@ Similar to cocoon, but with no jquery dependency!
 # Installation
 Just add it to your gemfile
 
-```gem 'vanilla_nested'```
+```ruby
+gem 'vanilla_nested'
+# or gem 'vanilla_nested', github: 'arielj/vanilla-nested'
+```
 
 If you are using Sprockets, just require the js
 
@@ -310,3 +313,10 @@ It would detect the wrong element for the click event, making the JS fail.
 # Changes from 1.2.3 to 1.2.4
 
 Play nicely with Turbolinks' `turbolinks:load` event.
+
+# Changes from 1.2.4 to 1.2.5
+
+License change from GPL to MIT
+
+
+> Remember to update both gem and package https://github.com/arielj/vanilla-nested/tree/master#update
