@@ -1,0 +1,14 @@
+<%= form_for user do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= link_to_add_nested(form, :pets, '#pets', tag: 'span', partial: 'pet_fields_with_custom_link_tag') do %>
+    <span><span>Add Pet</span></span>
+  <% end %>
+  <h1>Pets</h1>
+  <div id='pets'>
+    <%= form.fields_for :pets do |pet_f| %>
+      <%= render 'pet_fields_with_custom_link_tag', form: pet_f %>
+    <% end %>
+  </div>
+<% end %>
