@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get :new_with_custom_link_tag
+      get :new_with_undo
     end
   end
 end

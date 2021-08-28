@@ -69,7 +69,13 @@
   // Hides an element, mainly the wrapper of a group of fields
   // "wrapper" is the wrapper of the link to remove fields
   function hideWrapper(wrapper) {
-    wrapper.style.display = 'none';
+    if (wrapper.classList.contains('added-by-vanilla-nested')) {
+      wrapper.remove();
+    } else {
+      const destroyInput = wrapper.querySelector('[name$="[_destroy]"');
+      wrapper.innerHTML = '';
+      wrapper.insertAdjacentElement('afterbegin', destroyInput);
+    }
   }
 
   // Unhides the children given a fields wrapper
