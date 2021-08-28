@@ -57,4 +57,30 @@ class VanillaNestedTest < ApplicationSystemTestCase
     assert_selector '.pet-fields', count: 3
     assert_selector 'span', text: 'Limit reached', count: 1
   end
+
+  test "accepts custom tags for link_to_add/remove_nested" do
+    visit new_with_custom_link_tag_users_path
+
+    assert_selector '#new_user'
+
+    assert_selector '.pet-fields', count: 1
+
+    within '.pet-fields:nth-of-type(1)' do
+      fill_in 'Name', with: 'Spike'
+    end
+
+    # wrapper is a SPAN tag
+    find('span.vanilla-nested-add', text: 'Add Pet').click
+
+    assert_selector '.pet-fields', count: 2
+
+    within '.pet-fields:nth-of-type(2)' do
+      fill_in 'Name', with: 'Marnie'
+    end
+
+    # wrapper is a DIV tag
+    within '.pet-fields:nth-of-type(1)' do
+      find('div.vanilla-nested-remove', text: 'X').click
+    end
+  end
 end
