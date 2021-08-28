@@ -7,6 +7,7 @@
   <% end %>
   <h1>Pets</h1>
   <div id='pets'>
+    <p>The limit is 3, configured in the model:</p>
     <%= form.fields_for :pets do |pet_f| %>
       <%= render 'pet_fields', form: pet_f %>
     <% end %>
