@@ -36,7 +36,7 @@
 
     // dispatch an event if we reached the limit configured on the model
     if (data.limit) {
-      let nestedElements = container.children.length;
+      let nestedElements = container.querySelectorAll('[name$="[_destroy]"][value="0"]').length;
       if (nestedElements >= data.limit)
         _dispatchEvent(container, 'vanilla-nested:fields-limit-reached', element)
     }
