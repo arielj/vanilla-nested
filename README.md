@@ -393,4 +393,4 @@ License change from GPL to MIT
 - Custom generated HTML element tag
 - Extra class added to dynamically added fields
 
-> Remember to update both gem and package https://github.com/arielj/vanilla-nested/tree/master#update
+> Remember to update both gem and package https://github.com/arielj/vanilla-nested#update
