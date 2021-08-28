@@ -310,7 +310,7 @@ You can run the tests following these commands:
 - rails test # unit tests
 - rails test:system # system tests
 
-> If you make changes in the JS files, you have to tell yarn to refresh the code inside the node_modules folder running `yarn upgrade vanilla-nested`, then clear webpacker cache with `rails webpacker:clobber`, and then restart the rails server or re-run the tests.
+> If you make changes in the JS files, you have to tell yarn to refresh the code inside the node_modules folder running `./bin/update-gem` (or `yarn upgrade vanilla-nested` and `rails webpacker:clobber`), and then restart the rails server or re-run the tests.
 
 # Changes from 1.0.0 to 1.1.0
 
