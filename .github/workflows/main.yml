@@ -4,10 +4,10 @@ name: CI
 on:
   push:
     branches:
-    - master
+      - master
   pull_request:
     branches:
-    - master
+      - master
 
 defaults:
   run:
@@ -22,7 +22,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6
+          ruby-version: 2.6.6
           working-directory: test/VanillaNestedTests
           bundler-cache: true
       - name: YARN
@@ -34,4 +34,3 @@ jobs:
         run: bundle exec rails test
       - name: System tests
         run: bundle exec rails test:system
-          
