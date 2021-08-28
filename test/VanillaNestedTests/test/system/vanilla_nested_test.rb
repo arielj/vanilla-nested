@@ -7,7 +7,8 @@ class VanillaNestedTest < ApplicationSystemTestCase
 
     assert_selector '#new_user'
 
-    assert_selector '.pet-fields', count: 1
+    # one field, not added by vanilla-nested
+    assert_selector '.pet-fields:not(.added-by-vanilla-nested)', count: 1
 
     within '.pet-fields:nth-of-type(1)' do
       fill_in 'Name', with: 'Spike'
@@ -17,6 +18,9 @@ class VanillaNestedTest < ApplicationSystemTestCase
     find('a.vanilla-nested-add', text: 'Add Pet').click
 
     assert_selector '.pet-fields', count: 2
+    # one added and one not added by vanilla-nested
+    assert_selector '.pet-fields:not(.added-by-vanilla-nested)', count: 1
+    assert_selector '.pet-fields.added-by-vanilla-nested', count: 1
 
     within '.pet-fields:nth-of-type(2)' do
       fill_in 'Name', with: 'Marnie'

@@ -12,6 +12,7 @@
     const container = document.querySelector(data.containerSelector);
     const newHtml = data.html.replace(/_idx_placeholder_/g, Date.now());
 
+    // insert and store reference
     let inserted;
     switch (data.methodForInsert) {
       case ('append'):
@@ -23,6 +24,9 @@
         inserted = container.firstElementChild;
         break;
     }
+
+    // add a class to show it was added dynamically
+    inserted.classList.add('added-by-vanilla-nested');
 
     _dispatchEvent(container, 'vanilla-nested:fields-added', element, {added: inserted})
 
