@@ -310,6 +310,8 @@ You can run the tests following these commands:
 - rails test # unit tests
 - rails test:system # system tests
 
+> If you make changes in the JS files, you have to tell yarn to refresh the code inside the node_modules folder running `yarn upgrade vanilla-nested`, then clear webpacker cache with `rails webpacker:clobber`, and then restart the rails server or re-run the tests.
+
 # Changes from 1.0.0 to 1.1.0
 
 #### Change the method to infere the name of the partial
@@ -385,5 +387,10 @@ Play nicely with Turbolinks' `turbolinks:load` event.
 # Changes from 1.2.4 to 1.2.5
 
 License change from GPL to MIT
+
+# Changes for next release:
+
+- Custom generated HTML element tag
+- Extra class added to dynamically added fields
 
 > Remember to update both gem and package https://github.com/arielj/vanilla-nested/tree/master#update
