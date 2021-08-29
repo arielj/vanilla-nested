@@ -31,7 +31,7 @@ And then use it in your application.js as:
 import "vanilla-nested";
 ```
 
-# Update
+# Updating
 
 To update the gem use either:
 
@@ -52,6 +52,33 @@ yarn upgrade vanilla-nested
 > You can clear the webpacker cache just in case if changes are not reflecting with `rails webpacker:clobber`
 
 # Usage
+
+### Backend prerequisites
+
+```ruby
+# models/order.rb
+class Order < ApplicationRecord
+  has_many :order_items
+  accepts_nested_attributes_for :order_items, reject_if: :all_blank, allow_destroy: true
+```
+
+```ruby
+# models/order_item.rb
+class OrderItem < ApplicationRecord
+  belongs_to :order
+end
+```
+
+```ruby
+class OrdersController < ApplicationController
+  ...
+  def order_params
+    params.require(:order).permit(:attr, order_items_attributes: [:id, :attr1, :attr2, :_destroy])
+  end
+end
+```
+
+### Adding/Removing nested fields
 
 ```HTML+ERB
 # orders/_order_item_fields.html.erb
