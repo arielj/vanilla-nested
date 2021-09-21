@@ -4,6 +4,10 @@ Rails dynamic nested forms using vanilla JS
 
 Similar to cocoon, but with no jquery dependency!
 
+Example:
+
+![vanilla-nested-demo-gif](https://user-images.githubusercontent.com/13472945/134256918-b8b65f93-dd32-4e17-bf13-cabc7f729ac0.gif)
+
 # Installation
 
 Just add it to your gemfile
@@ -85,7 +89,7 @@ end
 <div class="wrapper-div">
   <%= form.text_field :attr1 %>
   <%= form.select :attr2 ..... %>
-  <%= link_to_remove_nested(form) # adds a link to remove the element %>
+  <%= link_to_remove_nested(form) %> <!-- adds a link to add more items -->
 </div>
 ```
 
@@ -94,7 +98,7 @@ end
 <%= form_for product do |form| %>
   <%= form.text_field :attr %>
 
-  <%= link_to_add_nested(form, :order_items, '#order-items') # adds a link to add more items %>
+  <%= link_to_add_nested(form, :order_items, '#order-items') %> <!-- adds a link to add more items -->
   <div id='order-items'>
     <%= form.fields_for :order_items do |order_item_f| %>
       <%= render 'order_item_fields', form: order_item_f %>
