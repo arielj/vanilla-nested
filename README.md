@@ -6,7 +6,7 @@ Similar to cocoon, but with no jquery dependency!
 
 Example:
 
-![sample-gif](./blob/main/github-assets/sample.gif)
+![sample-gif](./github-assets/sample.gif)
 
 # Installation
 
