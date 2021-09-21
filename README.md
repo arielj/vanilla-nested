@@ -6,7 +6,7 @@ Similar to cocoon, but with no jquery dependency!
 
 Example:
 
-![vanilla-nested-demo-gif](https://user-images.githubusercontent.com/13472945/134256918-b8b65f93-dd32-4e17-bf13-cabc7f729ac0.gif)
+![sample-gif](./blob/main/github-assets/sample.gif)
 
 # Installation
 
@@ -327,10 +327,6 @@ Triggered when the user undo the removal using the "undo" link.
     // e.detail.triggeredBy == the "undo" link
   })
 ```
-
-## Using Webpacker
-
-For now, if you want to use this with webpacker, download the vanilla_nested.js file, put in inside `app/javascript` folder and import it on your `application.js` using `import '../vanilla_nested.js'`.
 
 ## Testing
 
