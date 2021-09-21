@@ -14,7 +14,7 @@ Just add it to your gemfile
 
 ```ruby
 gem 'vanilla_nested'
-# or gem 'vanilla_nested', github: 'arielj/vanilla-nested'
+# or gem 'vanilla_nested', github: 'arielj/vanilla-nested', branch: :main
 ```
 
 If you are using Sprockets, just require the js
