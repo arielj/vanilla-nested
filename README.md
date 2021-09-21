@@ -4,6 +4,10 @@ Rails dynamic nested forms using vanilla JS
 
 Similar to cocoon, but with no jquery dependency!
 
+Example:
+
+![vanilla-nested-demo-gif](https://user-images.githubusercontent.com/13472945/134256918-b8b65f93-dd32-4e17-bf13-cabc7f729ac0.gif)
+
 # Installation
 
 Just add it to your gemfile
