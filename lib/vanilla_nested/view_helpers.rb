@@ -11,8 +11,9 @@ module VanillaNested
     # @param partial_form_variable [String, Symbol] name of the variable that represents the form builder inside the fields partial
     # @param tag [String] HTML tag to use for the html generated, defaults to and `a` tag
     # @param link_content [Block] block of code for the link content
+    # @param tag_attributes [Hash<attribute, value>] hash with attribute,value pairs for the html tag
     # @return [String] link tag
-    def link_to_add_nested(form, association, container_selector, link_text: nil, link_classes: '', insert_method: :append, partial: nil, partial_form_variable: :form, tag: 'a', &link_content)
+    def link_to_add_nested(form, association, container_selector, link_text: nil, link_classes: '', insert_method: :append, partial: nil, partial_form_variable: :form, tag: 'a', tag_attributes: {}, &link_content)
       association_class = form.object.class.reflections[association.to_s].klass
       object = association_class.new
 
@@ -36,7 +37,11 @@ module VanillaNested
       nested_options = form.object.class.nested_attributes_options[association.to_sym]
       data['limit'] = nested_options[:limit] if nested_options[:limit]
 
-      content_tag(tag, class: classes, data: data) do
+      attributes = tag_attributes
+      attributes[:class] = "#{attributes.fetch(:class, '')} #{classes}"
+      attributes[:data] = attributes.fetch(:data, {}).merge(data)
+
+      content_tag(tag, attributes) do
         if block_given?
           yield link_content
         else
@@ -54,8 +59,9 @@ module VanillaNested
     # @param ulink_classes [String] space separated list of classes for the "x" link
     # @param tag [String] HTML tag to use for the html generated, defaults to and `a` tag
     # @param link_content [Block] block of code for the link content
+    # @param tag_attributes [Hash<attribute, value>] hash with attribute,value pairs for the html tag
     # @return [String] hidden field and link tag
-    def link_to_remove_nested(form, link_text: 'X', fields_wrapper_selector: nil, undo_link_timeout: nil, undo_link_text: 'Undo', undo_link_classes: '', link_classes: '', tag: 'a', &link_content)
+    def link_to_remove_nested(form, link_text: 'X', fields_wrapper_selector: nil, undo_link_timeout: nil, undo_link_text: 'Undo', undo_link_classes: '', link_classes: '', tag: 'a', tag_attributes: {}, &link_content)
       data = {
         'fields-wrapper-selector': fields_wrapper_selector,
         'undo-timeout': undo_link_timeout,
@@ -65,10 +71,14 @@ module VanillaNested
 
       classes = "vanilla-nested-remove #{link_classes}"
 
+      attributes = tag_attributes
+      attributes[:class] = "#{attributes.fetch(:class, '')} #{classes}"
+      attributes[:data] = attributes.fetch(:data, {}).merge(data)
+
       capture do
         concat form.hidden_field(:_destroy, value: 0)
         concat(
-          content_tag(tag, class: classes, data: data) do
+          content_tag(tag, attributes) do
             if block_given?
               yield link_content
             else

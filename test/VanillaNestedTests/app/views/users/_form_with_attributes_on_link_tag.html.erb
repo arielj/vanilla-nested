@@ -1,0 +1,13 @@
+<%= form_for user do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name, tabindex: 1 %>
+
+  <%= link_to_add_nested(form, :pets, '#pets', link_text: '+', tag_attributes: {title: "Add Pet", data: {some_data: 'is preserved'}}, partial: 'pet_fields_with_attributes_on_link_tag') %>
+
+  <h1>Pets</h1>
+  <div id='pets'>
+    <%= form.fields_for :pets do |pet_f| %>
+      <%= render 'pet_fields_with_attributes_on_link_tag', form: pet_f %>
+    <% end %>
+  </div>
+<% end %>

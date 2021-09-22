@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :new_user
+
   def new
   end
 
@@ -7,6 +8,9 @@ class UsersController < ApplicationController
   end
 
   def new_with_undo
+  end
+
+  def new_with_attributes_on_link_tag
   end
 
   private
