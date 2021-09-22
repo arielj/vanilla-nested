@@ -175,6 +175,22 @@ The HTML tag that will be generated. An `<a>` tag by default.
 link_to_add_nested(form, :order_items, '#order-items', tag: 'span')
 ```
 
+#### Tag Attributes
+
+HTML attributes to set for the generated HTML tag. It's a has with key value pairs user for the `content_tag` call, so it support any attribute/value pair supported by [`content_tag`](https://apidock.com/rails/ActionView/Helpers/TagHelper/content_tag)
+
+```Ruby
+link_to_add_nested(form, :order_items, '#order-items', link_text: '+', tag_attributes: {title: "Add Order"})
+# <a ... title="Add Order" ... >+</a>
+```
+
+`class` attributes are appended to the `vanilla-nested-add` class and the custom classes specified with the `link_classes` argument.
+
+```Ruby
+link_to_add_nested(form, :order_items, '#order-items', link_text: '+', tag_attributes: {class: "some-class"}, link_classes: 'another-class')
+# <a ... class="some-class vanilla-nested-add another-class" ... >+</a>
+```
+
 #### Link content
 
 If you need html content, you can use a block:
@@ -242,6 +258,17 @@ The HTML tag that will be generated. An `<a>` tag by default.
 ```Ruby
 link_to_remove_nested(ff, tag: 'p')
 ```
+
+#### Tag Attributes
+
+HTML attributes to set for the generated HTML tag. It's a has with key value pairs user for the `content_tag` call, so it support any attribute/value pair supported by [`content_tag`](https://apidock.com/rails/ActionView/Helpers/TagHelper/content_tag)
+
+```Ruby
+link_to_remove_nested(ff, link_text: 'X', tag_attributes: {title: "Delete!"})
+# <a ... title="Delete!" ... >X</a>
+```
+
+`class` attributes are appended to the `vanilla-nested-remove` class and the custom classes specified with the `link_classes` argument, just like the `link_to_add_nested` helper.
 
 #### Undoing
 
@@ -436,5 +463,29 @@ Before, the elements were just hidden using `display: none` on the wrapper. That
 #### Correct calculation for the limit-reached event
 
 If the `accepts_nested_attributes_for` configuration has a limit, this gem was counting the number of children wrong (it was counting removed elements and extra children of the wrapper). This fixes that by only counting the `[_destroy]` hidden fields with value `0`.
+
+# Version 1.4.0 Changes
+
+#### Custom HTML attributes for the generated HTML element tag
+
+Both `link_to_add_nested` and `link_to_remove_nested` now support a `tag_attributes` keyword argument with key value pairs representing attributes and values for the generated HTML tag.
+
+You can use this to customize the tag as you need:
+
+- you can add a `title` for your `a` tag to make them more accessible:
+
+```Ruby
+link_to_remove_nested(ff, link_text: 'X', tag_attributes: {title: "Delete!"})
+# <a ... title="Delete!" ... >X</a>
+```
+
+- you can set a `type`, `name` and `value` for a `button` tag if you want to have a non-javascript submit action to fallback in case the user has Javascript disabled:
+
+```Ruby
+link_to_add_nested(form, :order_items, '#order-items', tag: 'button', tag_attributes: {type: 'submit', name: 'commit', value: 'add-nested' })
+# now you have a button tag that will submit your form with a `commit` param with `add-nested` as the value to handle a non-javascript fallback to add nested fields an re-render the form!
+```
+
+- you can set any valid html attribute accepted by [`content_tag`](https://apidock.com/rails/ActionView/Helpers/TagHelper/content_tag)
 
 > Remember to update both gem and package https://github.com/arielj/vanilla-nested#update
