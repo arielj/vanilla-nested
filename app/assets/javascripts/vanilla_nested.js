@@ -151,10 +151,14 @@
     initVanillaNested();
   })
 
-  // Don't run turbolinks event callback for first load, we already do it with DOMContentLoaded
+  // Don't run turbolinks/turbo event callback for first load, we already do it with DOMContentLoaded
   const notEmpty = (obj) => Object.keys(obj).length;
 
   document.addEventListener('turbolinks:load', function(e){
     if (notEmpty(e.data.timing)) initVanillaNested();
+  })
+
+  document.addEventListener('turbo:load', function(e){
+    if (notEmpty(e.detail.timing)) initVanillaNested();
   })
 })()

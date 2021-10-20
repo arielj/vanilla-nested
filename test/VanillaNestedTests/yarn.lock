@@ -890,6 +890,24 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.2.tgz#30aa825f11d438671d585bd44e7fd564535fc210"
   integrity sha512-82cpyJyKRoQoRi+14ibCeGPu0CwypgtBAdBhq1WfvagpCZNKqwXbKwXllYSMG91DhmG4jt9gN8eP6lGOtozuaw==
 
+"@hotwired/stimulus@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.0.1.tgz#141f15645acaa3b133b7c247cad58ae252ffae85"
+  integrity sha512-oHsJhgY2cip+K2ED7vKUNd2P+BEswVhrCYcJ802DSsblJFv7mPFVk3cQKvm2vHgHeDVdnj7oOKrBbzp1u8D+KA==
+
+"@hotwired/turbo-rails@^7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@hotwired/turbo-rails/-/turbo-rails-7.0.1.tgz#d39816eef215e83468fa306a963e7c874ffe70f7"
+  integrity sha512-0cV7zG9aCzF/foidgfx6WvqKDcRKXJt2aT1fenNFywO7armGTD8S86V8U1IyUAHq+ZkIL26moc+AB40uTZt0oA==
+  dependencies:
+    "@hotwired/turbo" "^7.0.1"
+    "@rails/actioncable" "^6.0.0"
+
+"@hotwired/turbo@^7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-7.0.1.tgz#2a8c6ab2f24914d1d47f3a7a7779e2881e8c61a0"
+  integrity sha512-awqraytYXbHV2NT0WAOnDDDGJeHHnFtnztdXvRuIqgsStUtPKM8B9H7ISm77SwbHemEjxEOB8Ku4RfNbEEXsPQ==
+
 "@npmcli/fs@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@npmcli/fs/-/fs-1.0.0.tgz#589612cfad3a6ea0feafcb901d29c63fd52db09f"
