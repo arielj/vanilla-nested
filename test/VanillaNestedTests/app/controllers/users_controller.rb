@@ -13,6 +13,10 @@ class UsersController < ApplicationController
   def new_with_attributes_on_link_tag
   end
 
+  def new_using_turbo
+    render template: 'users/new', layout: "turbo"
+  end
+
   private
   def new_user
     @user = User.new

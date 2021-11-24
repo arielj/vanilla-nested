@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get :new_with_custom_link_tag
       get :new_with_undo
       get :new_with_attributes_on_link_tag
+      get :new_using_turbo
     end
   end
 end
