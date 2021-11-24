@@ -7,6 +7,7 @@
   "author": "Ariel Juodziukynas <arieljuod@gmail.com>",
   "license": "MIT",
   "private": false,
+  "prepare": "echo ''",
   "files": [
     "app/"
   ]
