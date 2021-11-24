@@ -26,7 +26,7 @@ If you are using Sprockets, just require the js
 If you use Webpacker, add the package also (gem is required for the helper methods) using:
 
 ```sh
-yarn add arielj/vanilla-nested
+yarn add vanilla-nested
 ```
 
 And then use it in your application.js as:
@@ -488,10 +488,16 @@ link_to_add_nested(form, :order_items, '#order-items', tag: 'button', tag_attrib
 
 - you can set any valid html attribute accepted by [`content_tag`](https://apidock.com/rails/ActionView/Helpers/TagHelper/content_tag)
 
-> Remember to update both gem and package https://github.com/arielj/vanilla-nested#update
-
 # Version 1.5.0 Changes
 
 #### Added Integration with the `turbo` Gem
 
 The JavaScript part of the gem now plays nicely with the `turbo` gem by initializing the needed events when the `turbo:load` event is fired.
+
+# Version 1.5.1 Changes
+
+#### Yarn/NPM Packages
+
+Node package can be installed using npm or yarn without using the GitHub repo. This improves the size of the bundle and allows version flags.
+
+> Remember to update both gem and package https://github.com/arielj/vanilla-nested#update
