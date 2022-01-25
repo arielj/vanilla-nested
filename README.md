@@ -242,7 +242,7 @@ By default, the link to remove the fields assumes it's a direct child of the wra
     <%= ff.text_field :attr1 %>
     <%= ff.select :attr2 ..... %>
   </fieldset>
-  <span><%= link_to_remove_nested(ff, fields_wrapper_selector: 'wrapper-div') # if we don't set this, it will only hide the span %></span>
+  <span><%= link_to_remove_nested(ff, fields_wrapper_selector: '.wrapper-div') # if we don't set this, it will only hide the span %></span>
 </div>
 ```
 
