@@ -17,16 +17,34 @@ gem 'vanilla_nested'
 # or gem 'vanilla_nested', github: 'arielj/vanilla-nested', branch: :main
 ```
 
-If you are using Sprockets, just require the js
+## Using Sprockets
+
+Require the js:
 
 ```
 //= require vanilla_nested
 ```
 
-If you use Webpacker, add the package also (gem is required for the helper methods) using:
+## Using Webpacker
+
+Add the package too (gem is required for the helper methods) using:
 
 ```sh
 yarn add vanilla-nested
+```
+
+And then use it in your application.js as:
+
+```js
+import "vanilla-nested";
+```
+
+## Using Importmaps in Rails 7
+
+Add the importmap config:
+
+```rb
+pin "vanilla-nested", to: "vanilla_nested.js", preload: true
 ```
 
 And then use it in your application.js as:
@@ -57,7 +75,7 @@ yarn upgrade vanilla-nested
 
 # Usage
 
-### Backend prerequisites
+## Backend prerequisites
 
 ```ruby
 # models/order.rb
@@ -501,3 +519,13 @@ The JavaScript part of the gem now plays nicely with the `turbo` gem by initiali
 Node package can be installed using npm or yarn without using the GitHub repo. This improves the size of the bundle and allows version flags.
 
 > Remember to update both gem and package https://github.com/arielj/vanilla-nested#update
+
+# Version 1.6.0 Changes
+
+#### Fix undeclared variables
+
+https://github.com/arielj/vanilla-nested/pull/45 thanks @gmeir.
+
+#### Added engine config to support importmaps
+
+You can pin the vanilla-nested module. A Rails 7 sample app is added to the test directory.

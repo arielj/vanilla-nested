@@ -1,0 +1,11 @@
+<div class="pet-fields">
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.label :color %>
+  <%= form.text_field :color %>
+  <%= link_to_remove_nested(form) do %>
+    <span>
+      <span>X</span>
+    </span>
+  <% end %>
+</div>

@@ -1,6 +1,4 @@
-# .github/workflows/ci.yml
-
-name: CI
+name: Tests Rails 6
 on:
   push:
     branches:

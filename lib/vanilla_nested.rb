@@ -9,5 +9,11 @@ module VanillaNested
         ActionView::Base.send :include, VanillaNested::ViewHelpers
       end
     end
+
+    initializer "vanilla_nested.assets" do
+      if Rails.application.config.respond_to?(:assets)
+        Rails.application.config.assets.precompile += %w( vanilla_nested.js )
+      end
+    end
   end
 end

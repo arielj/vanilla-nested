@@ -1,0 +1,29 @@
+name: Tests Rails 7
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+defaults:
+  run:
+    working-directory: ./test/VanillaNestedTestRails7
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.2
+          working-directory: test/VanillaNestedTestRails7
+          bundler-cache: true
+      - name: Unit tests
+        run: bundle exec rails test
+      - name: System tests
+        run: bundle exec rails test:system

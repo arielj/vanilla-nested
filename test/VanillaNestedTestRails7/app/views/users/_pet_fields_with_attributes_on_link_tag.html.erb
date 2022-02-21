@@ -1,0 +1,7 @@
+<div class="pet-fields">
+  <%= form.label :name %>
+  <%= form.text_field :name, tabindex: 2 %>
+  <%= form.label :color %>
+  <%= form.text_field :color, tabindex: 2 %>
+  <%= link_to_remove_nested(form, tag: 'button', link_text: 'X', tag_attributes: {tabindex: "10"}) %>
+</div>

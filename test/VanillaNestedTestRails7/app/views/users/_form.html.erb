@@ -1,0 +1,15 @@
+<%= form_for user do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= link_to_add_nested(form, :pets, '#pets') do %>
+    <span><span>Add Pet</span></span>
+  <% end %>
+  <h1>Pets</h1>
+  <div id='pets'>
+    <p>The limit is 3, configured in the model:</p>
+    <%= form.fields_for :pets do |pet_f| %>
+      <%= render 'pet_fields', form: pet_f %>
+    <% end %>
+  </div>
+<% end %>
