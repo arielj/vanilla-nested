@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    vanilla_nested (1.5.1)
+    vanilla_nested (1.6.0)
 
 GEM
   remote: https://rubygems.org/
@@ -241,4 +241,4 @@ RUBY VERSION
    ruby 2.6.6p146
 
 BUNDLED WITH
-   2.2.26
+   2.2.29

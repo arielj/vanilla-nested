@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    vanilla_nested (1.5.1)
+    vanilla_nested (1.6.0)
 
 GEM
   remote: https://rubygems.org/
