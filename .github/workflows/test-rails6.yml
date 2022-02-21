@@ -23,6 +23,9 @@ jobs:
           ruby-version: 2.6.6
           working-directory: test/VanillaNestedTests
           bundler-cache: true
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
       - name: YARN
         uses: bahmutov/npm-install@v1
         with:
