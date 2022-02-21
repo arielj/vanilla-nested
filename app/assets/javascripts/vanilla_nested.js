@@ -53,7 +53,8 @@
 
     const data = element.dataset;
     let wrapper = element.parentElement;
-    if (sel = data.fieldsWrapperSelector) wrapper = element.closest(sel);
+    const sel = data.fieldsWrapperSelector;
+    if (sel) wrapper = element.closest(sel);
 
     if (data.undoTimeout) {
       hideFieldsWithUndo(wrapper, element);
@@ -129,7 +130,8 @@
     const undo = document.createElement('A');
 
     undo.classList.add('vanilla-nested-undo');
-    if (classes = data.undoLinkClasses)
+    const classes = data.undoLinkClasses;
+    if (classes)
       undo.classList.add(...classes.split(' '));
 
     undo.innerText = data.undoText;
