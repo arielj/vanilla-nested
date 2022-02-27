@@ -82,14 +82,28 @@
   // Unhides the children given a fields wrapper
   // "wrapper" is the wrapper of the link to remove fields
   function unhideFields(wrapper) {
-    [...wrapper.children].forEach(child => child.style.display = 'initial');
+    [...wrapper.children].forEach(child => {
+      if (child.dataset.hasAttributeStyle) {
+        child.style.display = child.dataset.originalDisplay;
+      } else {
+        child.removeAttribute("style");
+      }
+    });
   }
 
   // Hides an element and adds an "undo" link to unhide it
   // "wrapper" is the wrapper to hide
   // "element" is the link to remove the wrapper
   function hideFieldsWithUndo(wrapper, element) {
-    [...wrapper.children].forEach(child => child.style.display = 'none');
+    [...wrapper.children].forEach(child => {
+      // store original style for after undo
+      if (child.getAttribute("style")) {
+        child.dataset.hasAttributeStyle = true;
+        child.dataset.originalDisplay = child.style.display;
+      }
+
+      child.style.display = 'none';
+    });
 
     // add the 'undo' link with it's callback
     const undoLink = _createUndoWithElementsData(element.dataset);

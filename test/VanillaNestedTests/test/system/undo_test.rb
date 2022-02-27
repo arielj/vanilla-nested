@@ -24,9 +24,19 @@ class UndoTest < ApplicationSystemTestCase
       # added the Undo button
       assert_selector '.vanilla-nested-undo', text: 'Undo', count: 1
 
+      # test `hidden` style handling
+      assert_selector '[style="color: blue; display: none;"]', count: 1, visible: false
+      assert_selector '[style="color: blue; display: inline-block;"]', count: 0, visible: false
+      assert_selector '[style="display: none;"]', visible: false
+
       # click undo to stop the removal
       find('.vanilla-nested-undo', text: 'Undo').click()
       assert_selector '.vanilla-nested-undo', text: 'Undo', count: 0
+
+      # test `after-undo` style handling
+      assert_selector '[style="color: blue; display: none;"]', count: 0
+      assert_selector '[style="color: blue; display: inline-block;"]', count: 1
+      assert_selector '[style="display: none;"]', count: 0
 
       # click to remove for real
       find('.vanilla-nested-remove', text: 'X').click

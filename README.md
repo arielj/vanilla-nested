@@ -14,7 +14,9 @@ Just add it to your gemfile
 
 ```ruby
 gem 'vanilla_nested'
-# or gem 'vanilla_nested', github: 'arielj/vanilla-nested', branch: :main
+
+# or, to use latest code from git:
+gem 'vanilla_nested', github: 'arielj/vanilla-nested', branch: :main
 ```
 
 ## Using Sprockets
@@ -31,6 +33,9 @@ Add the package too (gem is required for the helper methods) using:
 
 ```sh
 yarn add vanilla-nested
+
+# or, to use latest code from git:
+yarn add arielj/vanilla-nested
 ```
 
 And then use it in your application.js as:
@@ -518,8 +523,6 @@ The JavaScript part of the gem now plays nicely with the `turbo` gem by initiali
 
 Node package can be installed using npm or yarn without using the GitHub repo. This improves the size of the bundle and allows version flags.
 
-> Remember to update both gem and package https://github.com/arielj/vanilla-nested#update
-
 # Version 1.6.0 Changes
 
 #### Fix undeclared variables
@@ -529,3 +532,11 @@ https://github.com/arielj/vanilla-nested/pull/45 thanks @gmeir.
 #### Added engine config to support importmaps
 
 You can pin the vanilla-nested module. A Rails 7 sample app is added to the test directory.
+
+# Version 1.6.1 Changes
+
+#### Fix elements' style after undo
+
+When undoing a removal, the gem was setting `display: initial` to all the elements. Now it sets the `display` value it had before hidding the element.
+
+> Remember to update both gem and package https://github.com/arielj/vanilla-nested#update

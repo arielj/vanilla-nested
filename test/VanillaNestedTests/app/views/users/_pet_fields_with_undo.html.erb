@@ -1,6 +1,6 @@
 <div class="pet-fields">
   <%= form.label :name %>
-  <%= form.text_field :name %>
+  <%= form.text_field :name, style: "color: blue; display: inline-block" %>
   <%= form.label :color %>
   <%= form.text_field :color %>
   <%= link_to_remove_nested(form, undo_link_timeout: 400) do %>
