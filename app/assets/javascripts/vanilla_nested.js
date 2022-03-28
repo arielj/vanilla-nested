@@ -1,10 +1,7 @@
 (function(){
   // Get the html from the data attribute and insert the new fields on the container
   // "event" is the click event of the link created by the rails helper
-  window.addVanillaNestedFields = function(event) {
-    event.preventDefault();
-
-    let element = event.target;
+  window.addVanillaNestedFields = function(element) {
     if (!element.classList.contains('vanilla-nested-add'))
       element = element.closest('.vanilla-nested-add')
 
@@ -44,10 +41,7 @@
 
   // Removes the fields or hides them until the undo timer times out
   // "event" is the click event of the link created by the rails helper
-  window.removeVanillaNestedFields = function(event) {
-    event.preventDefault();
-
-    let element = event.target;
+  window.removeVanillaNestedFields = function(element) {
     if (!element.classList.contains('vanilla-nested-remove'))
       element = element.closest('.vanilla-nested-remove')
 
@@ -154,27 +148,34 @@
   }
 
   function initVanillaNested() {
-    document.querySelectorAll('.vanilla-nested-add').forEach(el => {
-      el.addEventListener('click', addVanillaNestedFields, true);
+    document.addEventListener('click', ev => {
+      const addVanillaNested =
+        ev.target.classList.contains('vanilla-nested-add') ||
+        ev.target.closest('.vanilla-nested-add');
+
+      if (addVanillaNested) {
+        ev.preventDefault();
+        addVanillaNestedFields(ev.target);
+      }
     })
 
-    document.querySelectorAll('.vanilla-nested-remove').forEach(el => {
-      el.addEventListener('click', removeVanillaNestedFields, true);
+    document.addEventListener('click', ev => {
+      const removeVanillaNested =
+        ev.target.classList.contains('vanilla-nested-remove') ||
+        ev.target.closest('.vanilla-nested-remove');
+
+      if (removeVanillaNested) {
+        ev.preventDefault();
+        removeVanillaNestedFields(ev.target);
+      }
     })
   }
 
+  let vanillaNestedInitialized = false;
   document.addEventListener('DOMContentLoaded', function(){
-    initVanillaNested();
-  })
-
-  // Don't run turbolinks/turbo event callback for first load, we already do it with DOMContentLoaded
-  const notEmpty = (obj) => Object.keys(obj).length;
-
-  document.addEventListener('turbolinks:load', function(e){
-    if (notEmpty(e.data.timing)) initVanillaNested();
-  })
-
-  document.addEventListener('turbo:load', function(e){
-    if (notEmpty(e.detail.timing)) initVanillaNested();
+    if (!vanillaNestedInitialized) {
+      vanillaNestedInitialized = true;
+      initVanillaNested();
+    }
   })
 })()
