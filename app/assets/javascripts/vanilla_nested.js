@@ -41,7 +41,14 @@
 
   // Removes the fields or hides them until the undo timer times out
   // "event" is the click event of the link created by the rails helper
-  window.removeVanillaNestedFields = function(element) {
+  window.removeVanillaNestedFields = function(elementOrEvent) {
+    let element;
+    if (elementOrEvent.srcElement) {
+      element = elementOrEvent.srcElement;
+    } else {
+      element = elementOrEvent
+    }
+
     if (!element.classList.contains('vanilla-nested-remove'))
       element = element.closest('.vanilla-nested-remove')
 
