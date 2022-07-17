@@ -27,10 +27,6 @@
 
     _dispatchEvent(container, 'vanilla-nested:fields-added', element, {added: inserted})
 
-    let removeLink = inserted.querySelector('.vanilla-nested-remove');
-    if (removeLink)
-      removeLink.addEventListener('click', removeVanillaNestedFields, true);
-
     // dispatch an event if we reached the limit configured on the model
     if (data.limit) {
       let nestedElements = container.querySelectorAll('[name$="[_destroy]"][value="0"]').length;
