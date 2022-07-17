@@ -540,3 +540,9 @@ You can pin the vanilla-nested module. A Rails 7 sample app is added to the test
 When undoing a removal, the gem was setting `display: initial` to all the elements. Now it sets the `display` value it had before hidding the element.
 
 > Remember to update both gem and package https://github.com/arielj/vanilla-nested#update
+
+# Version 1.6.2 Changes
+
+#### Event listeners are now added once to the `document`
+
+Attach the vanilla-nested event listeners to the document object. This fixes [issues](https://github.com/arielj/vanilla-nested/issues/47) with turbo/hotwire where the listener was not being attached to the new elements added to the DOM. Thanks to @lenilsonjr for testing these changes!

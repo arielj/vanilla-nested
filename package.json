@@ -1,6 +1,6 @@
 {
   "name": "vanilla-nested",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "Dynamic nested form for Ruby On Rails",
   "main": "app/assets/javascripts/vanilla_nested.js",
   "repository": "git@github.com:arielj/vanilla-nested.git",
