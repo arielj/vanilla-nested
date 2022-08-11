@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'vanilla_nested'
-  s.version = '1.6.2'
+  s.version = '1.7.0'
   s.authors = ['Ariel Juodziukynas <arieljuod@gmail.com>']
   s.email = 'arieljuod@gmail.com'
   s.date = '2019-04-10'

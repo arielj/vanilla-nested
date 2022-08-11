@@ -167,11 +167,19 @@
     })
   }
 
-  let vanillaNestedInitialized = false;
-  document.addEventListener('DOMContentLoaded', function(){
+  let vanillaNestedInitialized = false
+  const initOnce = () => {
     if (!vanillaNestedInitialized) {
-      vanillaNestedInitialized = true;
-      initVanillaNested();
+      vanillaNestedInitialized = true
+      initVanillaNested()
     }
-  })
+  }
+
+  if (["complete", "interactive"].includes(document.readyState)) {
+    // if DOMContentLoaded was already fired
+    initOnce()
+  } else {
+    // else wait for it
+    document.addEventListener("DOMContentLoaded", () => initOnce())
+  }
 })()

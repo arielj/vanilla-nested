@@ -546,3 +546,9 @@ When undoing a removal, the gem was setting `display: initial` to all the elemen
 #### Event listeners are now added once to the `document`
 
 Attach the vanilla-nested event listeners to the document object. This fixes [issues](https://github.com/arielj/vanilla-nested/issues/47) with turbo/hotwire where the listener was not being attached to the new elements added to the DOM. Thanks to @lenilsonjr for testing these changes!
+
+# Version 1.7.0 Changes
+
+#### Fix initialization of Vanilla Nested when using importmaps and Safari
+
+The shim to support importmaps in Safari was not firing the load events as the code was expecting. This patches that by considering if the DOM is already ready when the code loads.
