@@ -7454,7 +7454,7 @@ validate-npm-package-license@^3.0.1:
     spdx-expression-parse "^3.0.0"
 
 "vanilla-nested@file:../..":
-  version "1.6.2"
+  version "1.7.0"
 
 vary@~1.1.2:
   version "1.1.2"
