@@ -190,6 +190,12 @@ link_to_add_nested(form, :order_items, '#order-items', partial: 'my_partial')
 link_to_add_nested(form, :order_items, '#order-items', partial_form_variable: :ff)
 ```
 
+You can also pass more local variables to the partial by setting the partial_locals value.
+
+```Ruby
+link_to_add_nested(form, :order_items, '#order-items', partial_locals: { key: 'value' })
+``` 
+
 #### Tag
 
 The HTML tag that will be generated. An `<a>` tag by default.

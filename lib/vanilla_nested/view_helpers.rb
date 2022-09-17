@@ -9,12 +9,12 @@ module VanillaNested
     # @param link_classes [String] space separated classes for the link tag
     # @param insert_method [:append, :prepend] tells javascript if the new fields should be appended or prepended to the container
     # @param partial_form_variable [String, Symbol] name of the variable that represents the form builder inside the fields partial
-    # @param partial_extra_params [Hash] extra params that should be send to the partial
+    # @param partial_locals [Hash] extra params that should be send to the partial
     # @param tag [String] HTML tag to use for the html generated, defaults to and `a` tag
     # @param link_content [Block] block of code for the link content
     # @param tag_attributes [Hash<attribute, value>] hash with attribute,value pairs for the html tag
     # @return [String] link tag
-    def link_to_add_nested(form, association, container_selector, link_text: nil, link_classes: '', insert_method: :append, partial: nil, partial_form_variable: :form, partial_extra_params: {}, tag: 'a', tag_attributes: {}, &link_content)
+    def link_to_add_nested(form, association, container_selector, link_text: nil, link_classes: '', insert_method: :append, partial: nil, partial_form_variable: :form, partial_locals: {}, tag: 'a', tag_attributes: {}, &link_content)
       association_class = form.object.class.reflections[association.to_s].klass
       object = association_class.new
 
@@ -22,7 +22,7 @@ module VanillaNested
 
       html = capture do
         form.fields_for association, object, child_index: '_idx_placeholder_' do |ff|
-          render partial: partial_name, locals: { partial_form_variable => ff }.merge(partial_extra_params)
+          render partial: partial_name, locals: { partial_form_variable => ff }.merge(partial_locals)
         end
       end
 
