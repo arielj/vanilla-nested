@@ -14,7 +14,7 @@ module VanillaNested
     # @param tag_attributes [Hash<attribute, value>] hash with attribute,value pairs for the html tag
     # @return [String] link tag
     def link_to_add_nested(form, association, container_selector, link_text: nil, link_classes: '', insert_method: :append, partial: nil, partial_form_variable: :form, tag: 'a', tag_attributes: {}, &link_content)
-      association_class = association.classify.constantize
+      association_class = association.to_s.classify.constantize
       object = association_class.new
 
       partial_name = partial || "#{association_class.name.underscore}_fields"
