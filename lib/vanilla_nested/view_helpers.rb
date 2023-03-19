@@ -35,7 +35,7 @@ module VanillaNested
       }
 
       nested_options = form.object.class.nested_attributes_options[association.to_sym]
-      data['limit'] = nested_options[:limit] if nested_options[:limit]
+      data['limit'] = nested_options[:limit] if nested_options && nested_options[:limit]
 
       attributes = tag_attributes
       attributes[:class] = "#{attributes.fetch(:class, '')} #{classes}"
