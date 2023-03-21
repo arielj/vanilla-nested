@@ -15,12 +15,19 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby:
+          - 2.6
+          - 2.7
+
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6.6
+          ruby-version: ${{ matrix.ruby }}
           working-directory: test/VanillaNestedTests
           bundler-cache: true
       - uses: actions/setup-node@v2
