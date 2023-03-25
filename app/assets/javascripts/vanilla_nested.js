@@ -106,6 +106,7 @@
       clearTimeout(timer);
       unhideFields(wrapper);
       wrapper.querySelector('[name$="[_destroy]"]').value = '0';
+      wrapper.classList.remove('hide-by-vanilla-nested');
       _dispatchEvent(wrapper, 'vanilla-nested:fields-hidden-undo', undoLink);
       undoLink.remove();
     }
