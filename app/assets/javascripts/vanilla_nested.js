@@ -63,6 +63,7 @@
     if (wrapper.classList.contains('added-by-vanilla-nested')) {
       wrapper.remove();
     } else {
+      wrapper.classList.add('deleted-by-vanilla-nested');
       const destroyInput = wrapper.querySelector('[name$="[_destroy]"');
       wrapper.innerHTML = '';
       wrapper.insertAdjacentElement('afterbegin', destroyInput);
@@ -85,6 +86,7 @@
   // "wrapper" is the wrapper to hide
   // "element" is the link to remove the wrapper
   function hideFieldsWithUndo(wrapper, element) {
+    wrapper.classList.add('hide-by-vanilla-nested');
     [...wrapper.children].forEach(child => {
       // store original style for after undo
       if (child.getAttribute("style")) {
