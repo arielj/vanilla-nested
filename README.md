@@ -552,3 +552,19 @@ Attach the vanilla-nested event listeners to the document object. This fixes [is
 #### Fix initialization of Vanilla Nested when using importmaps and Safari
 
 The shim to support importmaps in Safari was not firing the load events as the code was expecting. This patches that by considering if the DOM is already ready when the code loads.
+
+# Version 1.7.1 Changes
+
+#### New classes added
+
+When removing a nested element, a `hidden-by-vanilla-nested` class is added if there's a timeout. The class is removed if the action is undone.
+
+When removing a nested element, a `removed-by-vanilla-nested` class is added if there's no timeout or after the timeout expires.
+
+Thanks to @kikyous for the contribution!
+
+#### Tests in multiple Ruby versions
+
+Automated tests now run in multiple Ruby versions in CI.
+
+This change has no impact in the use of the gem, but I wanted to thank @petergoldstein for their contribution!

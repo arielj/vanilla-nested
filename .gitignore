@@ -1,2 +1,4 @@
 test/VanillaNestedTests/node_modules
+test/VanillaNestedTests/Gemfile.lock
+test/VanillaNestedTestRails7/Gemfile.lock
 notes.txt
