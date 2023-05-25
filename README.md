@@ -194,7 +194,7 @@ You can also pass more local variables to the partial by setting the partial_loc
 
 ```Ruby
 link_to_add_nested(form, :order_items, '#order-items', partial_locals: { key: 'value' })
-``` 
+```
 
 #### Tag
 
@@ -574,3 +574,7 @@ Thanks to @kikyous for the contribution!
 Automated tests now run in multiple Ruby versions in CI.
 
 This change has no impact in the use of the gem, but I wanted to thank @petergoldstein for their contribution!
+
+#### New `partial_locals` option for `link_to_add_nested`
+
+Now you can pass a new option with `locals` for the fields wrapper partial. Check https://github.com/arielj/vanilla-nested/pull/64 for an example. Thanks to @gregogalante for the contribution!
