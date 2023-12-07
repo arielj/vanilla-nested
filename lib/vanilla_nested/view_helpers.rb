@@ -31,7 +31,7 @@ module VanillaNested
       classes = "vanilla-nested-add #{link_classes}"
       data = {
         'container-selector': container_selector,
-        'html': html,
+        'html': html.gsub('"', "<vanilla-quote>"),
         'method-for-insert': method_for_insert
       }
 

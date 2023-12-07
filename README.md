@@ -8,7 +8,7 @@ Example:
 
 ![sample-gif](./github-assets/sample.gif)
 
-# Installation
+## Installation
 
 Just add it to your gemfile
 
@@ -17,9 +17,10 @@ gem 'vanilla_nested'
 
 # or, to use latest code from git:
 gem 'vanilla_nested', github: 'arielj/vanilla-nested', branch: :main
+# you can use any branch, note just main
 ```
 
-## Using Sprockets
+### Using Sprockets
 
 Require the js:
 
@@ -27,7 +28,7 @@ Require the js:
 //= require vanilla_nested
 ```
 
-## Using Webpacker
+### Using Webpacker
 
 Add the package too (gem is required for the helper methods) using:
 
@@ -36,6 +37,7 @@ yarn add vanilla-nested
 
 # or, to use latest code from git:
 yarn add arielj/vanilla-nested
+# you can use any branch with `yarn add arielj/vanilla-nested#branch-name`
 ```
 
 And then use it in your application.js as:
@@ -44,7 +46,7 @@ And then use it in your application.js as:
 import "vanilla-nested";
 ```
 
-## Using Importmaps in Rails 7
+### Using Importmaps in Rails 7
 
 Add the importmap config:
 
@@ -58,7 +60,7 @@ And then use it in your application.js as:
 import "vanilla-nested";
 ```
 
-# Updating
+## Updating
 
 To update the gem use either:
 
@@ -78,9 +80,9 @@ yarn upgrade vanilla-nested
 
 > You can clear the webpacker cache just in case if changes are not reflecting with `rails webpacker:clobber`
 
-# Usage
+## Usage
 
-## Backend prerequisites
+### Backend prerequisites
 
 ```ruby
 # models/order.rb
@@ -135,7 +137,42 @@ Note that:
 - `link_to_remove_nested` receives the nested form as a parameter, it adds a hidden `[_destroy]` field
 - `link_to_add_nested` expects the form builder, the name of the association and the selector of the container where the gem will insert the new fields
 
-# Customizing link_to_add_nested
+### Nested with Nested
+
+In order to support a nested dynamic association which also has nested dynamic associations, some conventions have to be followed. Because the rendering happens inside a partial, the `link_to_add_nested` helper doesn't have enough control over the placeholder used for the nested IDs and the nested-nested form has to be explicit with the placeholder:
+
+Given a relationship User has many Pets, and Pet has many Appointments, the appointments form nested inside the Pet form has to define the ids including the `_idx_placeholder_` string:
+
+```erb
+<div class="pet-fields">
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.label :color %>
+  <%= form.text_field :color %>
+  <%= link_to_remove_nested(form) do %>
+    <span>
+      <span>X</span>
+    </span>
+  <% end %>
+
+  <%= link_to_add_nested(form, :appointments, "#appointments_#{form.object.id}_idx_placeholder_") do %>
+    <span><span>Add Appointment</span></span>
+  <% end %>
+
+  <h2>Appointments</h1>
+  <div id="appointments_<%= form.object.id %>_idx_placeholder_">
+    <%= form.fields_for :appointments do |app_f| %>
+      <%= render 'appointment_fields', form: app_f %>
+    <% end %>
+  </div>
+</div>
+```
+
+**Note the `"#appointments_#{form.object.id}_idx_placeholder_"` string in the `link_to_add_nested` helper, and the string `"appointments_<%= form.object.id %>_idx_placeholder_"` as the div id.**
+
+> Currently, this was only tested with a 3-level nesting (for example: User -> Pets -> Appointments), handling a form with a 4-level nesting is not tested (and -this is my personal opinion- I'd suggest rethinking if such deep nesting is needed).
+
+### Customizing link_to_add_nested
 
 #### Link text
 
@@ -230,7 +267,7 @@ If you need html content, you can use a block:
 <% end %>
 ```
 
-# Customizing link_to_remove_nested
+### Customizing link_to_remove_nested
 
 #### Link text
 
@@ -313,7 +350,7 @@ Options are:
 - `undo_link_text`: string with the text of the link, great for internationalization, default: `'Undo'`
 - `undo_link_classes`: space separated string, default: `''`
 
-# Events
+### Events
 
 There are some events that you can listen to add custom callbacks on different moments. All events bubbles up the dom, so you can listen for them on any ancestor.
 
@@ -395,7 +432,9 @@ You can run the tests following these commands:
 
 > If you make changes in the JS files, you have to tell yarn to refresh the code inside the node_modules folder running `./bin/update-gem` (or `yarn upgrade vanilla-nested` and `rails webpacker:clobber`), and then restart the rails server or re-run the tests.
 
-# Version 1.1.0 Changes
+## History
+
+### Version 1.1.0 Changes
 
 #### Change the method to infere the name of the partial
 
@@ -427,19 +466,19 @@ Mostly on the javascript code
 
 So it can be used as a node module using yarn to integrate it using webpacker.
 
-# Version 1.2.0 Changes
+### Version 1.2.0 Changes
 
 #### New event for the "limit" option of `accepts_nested_attributes_for`
 
 You can listen to the `vanilla-nested:fields-limit-reached` event that will fire when container has more or equals the amount of children than the `limit` option set on the `accepts_nested_attributes_for` configuration.
 
-# Version 1.2.1 Changes
+### Version 1.2.1 Changes
 
 #### Removed "onclick" attribute for helpers and add event listeners within js
 
 If you were using webpacker, remember to replace the vanilla_nested.js file in your app/javascript folder
 
-# Version 1.2.2 Changes
+### Version 1.2.2 Changes
 
 #### Added "link_classes" option to "link_to_remove_nested"
 
@@ -449,7 +488,7 @@ You can set multiple classes for the "X" link
 
 You can pass a block to use as the content for the add and remove links
 
-# Version 1.2.3 Changes
+### Version 1.2.3 Changes
 
 #### Fix using nested html elements as the content for buttons
 
@@ -463,15 +502,15 @@ There was an error when using the helpers with things like:
 
 It would detect the wrong element for the click event, making the JS fail.
 
-# Version 1.2.4 Changes
+### Version 1.2.4 Changes
 
 Play nicely with Turbolinks' `turbolinks:load` event.
 
-# Version 1.2.5 Changes
+### Version 1.2.5 Changes
 
 License change from GPL to MIT
 
-# Version 1.3.0 Changes
+### Version 1.3.0 Changes
 
 #### Custom generated HTML element tag
 
@@ -493,7 +532,7 @@ Before, the elements were just hidden using `display: none` on the wrapper. That
 
 If the `accepts_nested_attributes_for` configuration has a limit, this gem was counting the number of children wrong (it was counting removed elements and extra children of the wrapper). This fixes that by only counting the `[_destroy]` hidden fields with value `0`.
 
-# Version 1.4.0 Changes
+### Version 1.4.0 Changes
 
 #### Custom HTML attributes for the generated HTML element tag
 
@@ -517,19 +556,19 @@ link_to_add_nested(form, :order_items, '#order-items', tag: 'button', tag_attrib
 
 - you can set any valid html attribute accepted by [`content_tag`](https://apidock.com/rails/ActionView/Helpers/TagHelper/content_tag)
 
-# Version 1.5.0 Changes
+### Version 1.5.0 Changes
 
 #### Added Integration with the `turbo` Gem
 
 The JavaScript part of the gem now plays nicely with the `turbo` gem by initializing the needed events when the `turbo:load` event is fired.
 
-# Version 1.5.1 Changes
+### Version 1.5.1 Changes
 
 #### Yarn/NPM Packages
 
 Node package can be installed using npm or yarn without using the GitHub repo. This improves the size of the bundle and allows version flags.
 
-# Version 1.6.0 Changes
+### Version 1.6.0 Changes
 
 #### Fix undeclared variables
 
@@ -539,7 +578,7 @@ https://github.com/arielj/vanilla-nested/pull/45 thanks @gmeir.
 
 You can pin the vanilla-nested module. A Rails 7 sample app is added to the test directory.
 
-# Version 1.6.1 Changes
+### Version 1.6.1 Changes
 
 #### Fix elements' style after undo
 
@@ -547,19 +586,19 @@ When undoing a removal, the gem was setting `display: initial` to all the elemen
 
 > Remember to update both gem and package https://github.com/arielj/vanilla-nested#update
 
-# Version 1.6.2 Changes
+### Version 1.6.2 Changes
 
 #### Event listeners are now added once to the `document`
 
 Attach the vanilla-nested event listeners to the document object. This fixes [issues](https://github.com/arielj/vanilla-nested/issues/47) with turbo/hotwire where the listener was not being attached to the new elements added to the DOM. Thanks to @lenilsonjr for testing these changes!
 
-# Version 1.7.0 Changes
+### Version 1.7.0 Changes
 
 #### Fix initialization of Vanilla Nested when using importmaps and Safari
 
 The shim to support importmaps in Safari was not firing the load events as the code was expecting. This patches that by considering if the DOM is already ready when the code loads.
 
-# Version 1.7.1 Changes
+### Version 1.7.1 Changes
 
 #### New classes added
 

@@ -17,9 +17,17 @@ class UsersController < ApplicationController
     render template: 'users/new', layout: "turbo"
   end
 
+  def create
+    User.create(user_params)
+  end
+
   private
   def new_user
     @user = User.new
     @user.pets.build
+  end
+
+  def user_params
+    params.require(:user).permit(pets_attributes: [:name, :color, {appointments_attributes: [:datetime]}])
   end
 end
