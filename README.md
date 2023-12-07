@@ -139,38 +139,37 @@ Note that:
 
 ### Nested with Nested
 
-In order to support a nested dynamic association which also has nested dynamic associations, some conventions have to be followed. Because the rendering happens inside a partial, the `link_to_add_nested` helper doesn't have enough control over the placeholder used for the nested IDs and the nested-nested form has to be explicit with the placeholder:
+In order to support a nested dynamic association which also has nested dynamic associations, some conventions have to be followed. Because the rendering happens inside a partial, the `link_to_add_nested` helper doesn't have enough control over the placeholder used for the nested IDs, so the placeholders used in the ids and selectors have to be defined explicitly:
 
-Given a relationship User has many Pets, and Pet has many Appointments, the appointments form nested inside the Pet form has to define the ids including the `_idx_placeholder_` string:
+Given a relationship User has many Pets, and Pet has many Appointments, the appointments form nested inside the Pet form has to define the ids to use:
 
 ```erb
-<div class="pet-fields">
-  <%= form.label :name %>
-  <%= form.text_field :name %>
-  <%= form.label :color %>
-  <%= form.text_field :color %>
-  <%= link_to_remove_nested(form) do %>
-    <span>
-      <span>X</span>
-    </span>
-  <% end %>
+# the first level can use the default `_idx_placeholder` or define one
 
-  <%= link_to_add_nested(form, :appointments, "#appointments_#{form.object.id}_idx_placeholder_") do %>
-    <span><span>Add Appointment</span></span>
-  <% end %>
+<%= link_to_add_nested(form, :pets, '#pets', idx_placeholder: "_idx1") do %>
+```
 
-  <h2>Appointments</h1>
-  <div id="appointments_<%= form.object.id %>_idx_placeholder_">
-    <%= form.fields_for :appointments do |app_f| %>
-      <%= render 'appointment_fields', form: app_f %>
-    <% end %>
-  </div>
+The second level has to follow more conventions:
+
+- The wrapper id has to include both the `form.object.id` value (to support persisted elements) and `_idx1` (in this example, it's the value used for idx_placeholder in the parent) to support new dynamic elements.
+
+```
+<div id="appointments_<%= form.object.id %>_idx1">
+  <%= form.fields_for :appointments do |app_f| %>
+    <%= render 'appointment_fields', form: app_f %>
+  <% end %>
 </div>
 ```
 
-**Note the `"#appointments_#{form.object.id}_idx_placeholder_"` string in the `link_to_add_nested` helper, and the string `"appointments_<%= form.object.id %>_idx_placeholder_"` as the div id.**
+- The call to `link_to_add_nested` we must use the same pattern for the third element (the wrapper's id) and MUST define a new different `idx_placeholder` value:
 
-> Currently, this was only tested with a 3-level nesting (for example: User -> Pets -> Appointments), handling a form with a 4-level nesting is not tested (and -this is my personal opinion- I'd suggest rethinking if such deep nesting is needed).
+```
+  <%= link_to_add_nested(form, :appointments, "#appointments_#{form.object.id}_idx1", idx_placeholder: "_idx2") do %>
+    <span><span>Add Appointment</span></span>
+  <% end %>
+```
+
+> Note that this feature is tested with 3-level nesting. If more levels are needed, a similar pattern must be used defining new values for ids and indexes (if I'm thought this through correctly), but it's not fully tested. If you end up having a form with 4 levels of nesting, I'd suggest rethinking if it's really necessary to avoid issues.
 
 ### Customizing link_to_add_nested
 

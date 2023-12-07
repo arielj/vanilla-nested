@@ -14,14 +14,14 @@ module VanillaNested
     # @param link_content [Block] block of code for the link content
     # @param tag_attributes [Hash<attribute, value>] hash with attribute,value pairs for the html tag
     # @return [String] link tag
-    def link_to_add_nested(form, association, container_selector, link_text: nil, link_classes: '', insert_method: :append, partial: nil, partial_form_variable: :form, partial_locals: {}, tag: 'a', tag_attributes: {}, &link_content)
+    def link_to_add_nested(form, association, container_selector, link_text: nil, link_classes: '', insert_method: :append, partial: nil, partial_form_variable: :form, partial_locals: {}, tag: 'a', tag_attributes: {}, idx_placeholder: '_idx_placeholder', &link_content)
       association_class = form.object.class.reflections[association.to_s].klass
       object = association_class.new
 
       partial_name = partial || "#{association_class.name.underscore}_fields"
 
       html = capture do
-        form.fields_for association, object, child_index: '_idx_placeholder_' do |ff|
+        form.fields_for association, object, child_index: idx_placeholder do |ff|
           render partial: partial_name, locals: { partial_form_variable => ff }.merge(partial_locals)
         end
       end
@@ -32,7 +32,8 @@ module VanillaNested
       data = {
         'container-selector': container_selector,
         'html': html.gsub('"', "<vanilla-quote>"),
-        'method-for-insert': method_for_insert
+        'method-for-insert': method_for_insert,
+        'idx-placeholder': idx_placeholder
       }
 
       nested_options = form.object.class.nested_attributes_options[association.to_sym]

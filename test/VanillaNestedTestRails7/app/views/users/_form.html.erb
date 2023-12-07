@@ -2,7 +2,7 @@
   <%= form.label :name %>
   <%= form.text_field :name %>
 
-  <%= link_to_add_nested(form, :pets, '#pets') do %>
+  <%= link_to_add_nested(form, :pets, '#pets', idx_placeholder: "_idx1") do %>
     <span><span>Add Pet</span></span>
   <% end %>
   <h1>Pets</h1>

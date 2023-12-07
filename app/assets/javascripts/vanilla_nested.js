@@ -9,7 +9,7 @@
     const container = document.querySelector(data.containerSelector);
     const newHtml = data.html
       .replace(/\<vanilla-quote\>/g, '"')
-      .replace(/_idx_placeholder_/g, Date.now());
+      .replace(new RegExp(data.idxPlaceholder, "g"), Date.now());
 
     // insert and store reference
     let inserted;
