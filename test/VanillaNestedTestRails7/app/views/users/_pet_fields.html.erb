@@ -1,11 +1,22 @@
-<div class="pet-fields">
-  <%= form.label :name %>
-  <%= form.text_field :name %>
-  <%= form.label :color %>
-  <%= form.text_field :color %>
-  <%= link_to_remove_nested(form) do %>
-    <span>
-      <span>X</span>
-    </span>
-  <% end %>
-</div>
+  <div class="pet-fields">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+    <%= form.label :color %>
+    <%= form.text_field :color %>
+    <%= link_to_remove_nested(form) do %>
+      <span>
+        <span>X</span>
+      </span>
+    <% end %>
+
+    <%= link_to_add_nested(form, :appointments, "#appointments_#{form.object.id}_idx1", idx_placeholder: "_idx2") do %>
+      <span><span>Add Appointment</span></span>
+    <% end %>
+
+    <h2>Appointments</h1>
+    <div id="appointments_<%= form.object.id %>_idx1">
+      <%= form.fields_for :appointments do |app_f| %>
+        <%= render 'appointment_fields', form: app_f %>
+      <% end %>
+    </div>
+  </div>
