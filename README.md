@@ -112,7 +112,7 @@ end
 <div class="wrapper-div">
   <%= form.text_field :attr1 %>
   <%= form.select :attr2 ..... %>
-  <%= link_to_remove_nested(form) %> <!-- adds a link to add more items -->
+  <%= link_to_remove_nested(form) %> <!-- adds a link to remove the element -->
 </div>
 ```
 
